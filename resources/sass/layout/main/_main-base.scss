@@ -1,0 +1,45 @@
+// Main Base
+.closed-sidebar {
+  .app-main {
+    .login-form {
+      margin: auto;
+    }
+  }
+}
+.app-main {
+  flex: 1;
+  display: flex;
+  z-index: 8;
+  position: relative;
+
+  .app-main__outer {
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+    z-index: 12;
+  }
+
+  .app-main__inner {
+    padding: $grid-gutter-width $grid-gutter-width 0;
+    flex: 1;
+  }
+  .login-form{
+    margin-right: 282px;
+    height: calc(100vh - 282px);
+  }
+}
+.login-form-close{
+    margin-left: 282px;
+}
+.datepicker {
+    padding: 6px !important;
+}
+.btn-save{
+    min-width: 100px !important;
+}
+.btn-saves{
+    min-width: 100px !important;
+}
+// Themes
+
+@import "themes/main-white";

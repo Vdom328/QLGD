@@ -1,0 +1,312 @@
+.btn-pain{
+    background-color: #FF9C9C;
+    color: white;
+    width: 45px;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 12px;
+    border: none;
+    display: inline-block;
+}
+.btn-detail{
+    width: 60px;
+    text-align: center;
+    font-size: 12px;
+    display: inline-block;
+    border: 1px solid ;
+}
+.btn-modal{
+    min-width: 100px;
+}
+.modal-dialog {
+    box-shadow: none;
+}
+.btn-analysis{
+    border: none;
+    border-radius: 0;
+    width: 70px;
+    background: #ededed;
+    font-weight: bold;
+}
+.btn-analysis-active{
+    color: white;
+    background-color: #494545;
+}
+@media (max-width: 600px) {
+}
+
+
+.btn-grey{
+    background-color: #EBEBEB;
+    color: black;
+    min-width: 75px;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 12px;
+    padding: 6px;
+    border: 1px solid;
+    display: inline-block;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    height: 31px;
+
+}
+.btn-grey:hover{
+    background-color: #837f7f;
+    color: white;
+}
+
+.btn-white{
+    background-color: #FFFF;
+    color: black;
+    min-width: 75px;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 12px;
+    padding: 6px;
+    height: 31px;
+    border: 1px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.active_white{
+    background-color: #7C7C7C;
+    color: white;
+}
+.btn-white:hover{
+    background-color: #365ab8;
+    color: white;
+}
+
+.btn-dark-dark{
+    background-color: #494545;
+    color: white;
+    min-width: 100px;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 12px;
+    padding: 6px 25px;
+    border: none;
+    display: inline-block;
+    text-wrap: nowrap;
+
+}
+.btn-add-new{
+    background-color: #494545;
+    color: white;
+    min-width: 110px;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 12px;
+    padding: 5px ;
+    border: none;
+    display: inline-block;
+    height: 33px;
+    text-wrap: nowrap;
+
+}
+.btn-dark-dark:hover{
+    background-color: #365ab8;
+    color: white;
+}
+.btn-add-new:hover{
+    background-color: #365ab8;
+    color: white;
+}
+.error{
+    color: red;
+    font-size: 12px;
+}
+
+/* table */
+.table > thead tr {
+    text-align: start;
+}
+.table > :not(caption) > * > * {
+    padding: 0.8rem 0.8rem;
+    background-color: var(--bs-table-bg);
+    border-bottom-width: 1px;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+.table > :not(:last-child) > :last-child > * {
+    border-bottom-color: #BFBFBF;
+}
+span#sorttable_sortrevind {
+    display: none;
+}
+span#sorttable_sortfwdind {
+    display: none;
+}
+
+.customer_table_container {
+    overflow: auto;
+}
+.table td
+{
+    min-width: 120px;
+}
+.table-hover > tbody > tr:hover {
+    --bs-table-accent-bg: #eeeeee !important;
+    background-color: #eeeeee !important;
+}
+table th{
+    font-weight: 500;
+}
+/* button */
+.btn_add {
+    background-color: #494545;
+    color: white;
+    border-radius: 50%;
+    border: none;
+    padding: 1px 8px 4px 8px;
+    text-wrap: nowrap;
+}
+.btn_add:hover
+{
+    background-color: #365ab8;
+}
+
+.btn_remove{
+    background-color: #494545;
+    color: white;
+    border-radius: 50%;
+    border: none;
+    padding: 1px 10px 4px 10px;
+    text-wrap: nowrap;
+}
+
+.btn_remove:hover
+{
+    background-color: #365ab8;
+}
+
+.fa-sort, .fa-sort-up, .fa-sort-down:hover{
+    cursor: pointer;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.custom_button{
+    border: 1px solid;
+    border-radius: 30px;
+    background-color: white;
+    padding: 2px 15px;
+    font-family: var(--bs-font-sans-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+}
+
+
+/* page*/
+span.page-link.rounded-circle {
+    padding: 0px 5px;
+    margin: 0px 7px;
+    background: white;
+    color: black;
+    font-size: 12px;
+    border: 1px solid;
+}
+
+a.page-link.rounded-circle {
+    padding: 0px 5px;
+    margin: 0px 7px;
+    background: white;
+    color: black;
+    font-size: 12px;
+    border: 1px solid;
+}
+
+.page-item.active .page-link,
+.pagination .active.page-number .page-link {
+    color: #fff;
+    background-color: black;
+    border-color: black;
+}
+.page-link.rounded-circle {
+    border-radius: 30px !important;
+}
+
+.pagination .active .page-link{
+    background: #000000;
+    border-color: #000000;
+}
+
+.pagination li a:hover {
+    transform: scale(1.2);
+    color: #000000;
+    border-color: #000000;
+    background: #FFFFFF;
+}
+
+li.page-item.active {
+    background: none !important;
+}
+
+.notification-count {
+    position: absolute;
+    top: 0px;
+    left: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    border-radius: 50%;
+    color: white;
+    font-size: 7px;
+  }
+
+.border_bottom_search {
+    border-bottom: #EFEFEF;
+}
+
+/* Custom style datepicker */
+.datepicker .datepicker-days .table-condensed{
+    text-align: center;
+}
+
+.datepicker .datepicker-days .table-condensed th, tr {
+    cursor: pointer;
+}
+
+.datepicker .datepicker-days .table-condensed tbody tr .day:hover,
+.datepicker .datepicker-years .table-condensed tbody td .year:hover,
+.datepicker .datepicker-months .table-condensed tbody td .month:hover
+{
+    background-color: #494545;
+    color: #FFFFFF;
+    border-radius: 5px;
+}
+
+.datepicker .datepicker-days .table-condensed tbody tr .active,
+.datepicker .datepicker-months .table-condensed tbody td .focused
+{
+    background-color: #494545 !important;
+    color: #FFFFFF;
+    border-radius: 5px;
+}
+
+.datepicker .datepicker-days .table-condensed tbody tr .today
+{
+    background-color: #d8d096;
+    color: #FFFFFF;
+    border-radius: 5px;
+}
+
+.datepicker .datepicker-years .table-condensed tbody td .year,
+.datepicker .datepicker-months .table-condensed tbody td .month
+{
+    padding: 5px;
+}
+
+.datepicker .datepicker-years .table-condensed tbody td .year:hover {
+    background-color: #494545;
+    color: #FFFFFF;
+    border-radius: 5px;
+}

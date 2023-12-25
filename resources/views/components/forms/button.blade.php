@@ -1,0 +1,1 @@
+<button class="btn btn-primary margin-bottom-1 mb-1 float-right {{ $class }}" id="{{ $id }}" name="{{ $name }}" value="{{ $value }}" type="{{ $type }}" {{$attrs}} data-title="{{$dataTitle}}" data-message="{{$dataMessage}}">{!! $text !!}</button>

@@ -1,0 +1,428 @@
+/*View port*/
+.viewport {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-bottom: 56.25%;
+}
+
+    .viewport > img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+    }
+
+    .viewport.fill img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .viewport.fill_v img {
+        height: 100%;
+        min-width: 100%;
+    }
+
+    .viewport.fill_h img {
+        width: 100%;
+        min-height: 100%;
+    }
+
+    .viewport.fit img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .viewport.fit_v img {
+        height: 100%;
+        max-width: 100%;
+    }
+
+    .viewport.fit_h img {
+        width: 100%;
+        max-height: 100%;
+    }
+
+    .viewport.center img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .viewport.stretch img {
+        width: 100%;
+        height: 100%;
+    }
+
+/* BASE */
+.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after { background-color: #716F6F;}
+
+/*Datepicker override*/
+.datepicker {
+    padding: 0.375rem 0.75rem;
+    & .datepicker-days {
+        & .table-condensed {
+            width: 100%;
+        }
+    }
+}
+
+/* spinner */
+#sk-spinner {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999999;
+    background: rgb(0 0 0 / 5%);
+}
+#sk-spinner .sk-bg-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/* MAIN */
+.fixed-header .app-main {
+    padding-top: 50px;
+}
+
+/* FIXED SIDEBAR */
+.fixed-sidebar {
+    .app-sidebar {
+        height: calc(100vh  - $app-header-height);
+        margin-top: 0;
+        padding-top: 10px;
+        overflow-y: auto;
+        width: 282px;
+        min-width: 282px;
+    }
+
+    .app-main {
+        .app-main__outer {
+            padding-left: 282px;
+            width: calc(100% - 282px);
+        }
+    }
+}
+
+
+/* CLOSED SIDEBAR */
+.closed-sidebar {
+    .app-sidebar {
+        width: 0px;
+        min-width: 0px;
+    }
+
+    &.fixed-sidebar {
+        .app-main__outer {
+          padding-left: 5px;
+          width: calc(100% - 5px);
+        }
+    }
+
+    &:not(.closed-sidebar-mobile) {
+        .app-header {
+          .app-header__logo {
+            width: auto;
+
+            .logo-src {
+                display: block;
+            }
+          }
+
+          .header__pane {
+            margin-top: 5px;
+          }
+        }
+
+    }
+}
+
+.app-header__logo {
+    width: auto;
+
+    .logo-text {
+        margin-left: 20px;
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    .header__pane {
+        margin-top: 5px;
+        margin-left: 10px;
+    }
+}
+
+.app-header {
+    .app-header__logo .text-logo {
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    .app-header__logo .logo-src {
+        background: none;
+        margin-left: 25px;
+        width: 34px !important;
+        height: auto;
+    }
+
+    .app-header__logo .logo-src img {
+        height: 30px;
+        // margin-bottom: 3px;
+        // margin-bottom: 5px;
+    }
+
+    .app-header__content {
+        .widget-content-left {
+            .widget-heading {
+                color: #494545;
+                font-weight: normal;
+                line-height: 29px;
+                opacity: 1;
+            }
+
+            img.avatar {width: 30px; height: 30px;}
+        }
+    }
+
+    .icon-logout {
+        width: 20px;
+        height: 20px;
+        color: #000000;
+        opacity: 1;
+    }
+}
+
+
+.app-page-title {
+    font-size:22px;font-weight: normal;
+
+    .page-title-icon {
+        width: 30px;
+        height: 30px;
+        box-shadow: none;
+        background-color: rgba(255, 255, 255, 0);
+        margin: 0 1rem 0 0;
+    }
+
+    .page-title-wrapper {
+        padding: 12px 19px 12px;
+        background-color: #FAFAFA;
+        .page-title-heading {color: #494545;}
+        .page-title-icon {
+            img{
+                width: 27px !important;
+            }
+        }
+    }
+}
+
+.page-title-actions {
+    padding: 0 1.4em;
+    font-size: 14px;
+}
+
+.app-main {
+    .app-main__inner {
+        padding: 0;
+    }
+
+
+}
+
+.app-theme-white {
+    .app-page-title {
+        padding: 0;
+        margin: 0;
+        background: none;
+    }
+
+    /* FOOTER */
+    .app-footer {
+        z-index: 15;
+        height: $app-footer-height;
+        position: relative;
+
+        .app-footer__inner {
+            background-color: #FFF;
+            display: block;
+            height: $app-footer-height;
+
+            .app-footer-center {padding-top: 5px;font-size: 15px; color: #000000; opacity: 1;}
+            // box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.16);
+        }
+    }
+}
+
+.app-main__inner {
+    .main-content {
+        padding: 0.1em 1.4em;
+    }
+
+    .form-status {
+        padding: 0.1em 1.4em;
+    }
+
+}
+
+/* TABLE */
+.table {
+    border-color: #BFBFBF;
+}
+.table-dark-light {
+    --bs-table-bg: #555555;
+    --bs-table-striped-bg: #3e444a;
+    --bs-table-striped-color: #fff;
+    --bs-table-active-bg: #484e53;
+    --bs-table-active-color: #fff;
+    --bs-table-hover-bg: #43494e;
+    --bs-table-hover-color: #fff;
+    color: #fff;
+    border-color: #BFBFBF;
+}
+
+.table > thead tr {
+    text-align: center;
+}
+
+/* BUTTON */
+.btn-thefarm-default {
+    background-color: #494545;
+    border-radius: 20px;
+    border-color: #494545;
+}
+
+/* MENU ICON */
+.icon-administrator-solid {
+    // background-image: url('/assets/images/icons/administrator-solid.png');
+    width: 21.5px;
+    height: 21.5px;
+}
+
+.icon-piggy-bank-s {
+    // background-image: url('/assets/images/icons/piggy-bank-s.png');
+    width: 26px;
+    height: 20px;
+}
+
+.icon-train {
+    // background-image: url('/assets/images/icons/train.png');
+    width: 20px;
+    height: 24px;
+}
+
+.icon-group {
+    // background-image: url('/assets/images/icons/group.png');
+    width: 23px;
+    height: 21px;
+}
+
+.icon-building {
+    // background-image: url('/assets/images/icons/building.png');
+    width: 18px;
+    height: 23px;
+}
+
+.icon-ios-paper {
+    // background-image: url('/assets/images/icons/ios-paper.png');
+    width: 22px;
+    height: 22px;
+}
+
+.icon-note-solid {
+    // background-image: url('/assets/images/icons/note-solid.png');
+    width: 25.5px;
+    height: 25.8px;
+}
+
+.icon-view-week {
+    // background-image: url('/assets/images/icons/view-week.png');
+    width: 24px;
+    height: 19.5px;
+}
+
+.icon-notes {
+    // background-image: url('/assets/images/icons/notes.png');
+    width: 25.5px;
+    height: 27.9px;
+}
+
+.icon-chart-line-data {
+    // background-image: url('/assets/images/icons/chart-line-data.png');
+    width: 18.5px;
+    height: 18.5px;
+}
+
+.icon-clipboard-data {
+    // background-image: url('/assets/images/icons/clipboard-data.png');
+    width: 18.5px;
+    height: 22.2px;
+}
+
+.icon-calendar {
+    // background-image: url('/assets/images/icons/calendar.png');
+    width: 18.5px;
+    height: 18.5px;
+}
+
+.icon-bxs-dashboard {
+    // background-image: url('/assets/images/icons/bxs-dashboard.png');
+    width: 21.5px;
+    // height: 21.5px;
+}
+
+.icon-piggy-bank-solid {
+    width: 26px;
+    height: 20.3px;
+}
+
+/* NAVIGATION MENU VERTICAL */
+.vertical-nav-menu {
+    .menu_icon {
+        text-align: center;
+        /* width: 25px;
+        height: 25px; */
+        line-height: 34px;
+        position: absolute;
+        left: 8px;
+        top: 50%;
+        margin-top: -11px;
+        font-size: 1.5rem;
+        opacity: 0.75;
+        transition: color 300ms;
+    }
+    .menu_icon_top{
+        top: 61%;
+    }
+
+    .menu_icon_bottom{
+        top: 41%;
+    }
+    a:hover .menu_icon {
+        opacity: 1;
+    }
+
+    .mm-active .menu_icon {
+        opacity: 1 !important;
+    }
+
+    li>ul>li .menu_icon {left: 15px;}
+    li>ul>li a {padding: 0 1.5rem 19px 50px;}
+
+    ul {padding: 0;}
+    li {
+        padding: 2px 0px;
+        a {
+            line-height: 29px;
+            text-align: left;
+            color: #494545;
+            padding: 5px 1.5rem 19px 50px;
+        }
+    }
+
+    ul>li>a {padding: 0 2.8rem;}
+    ul:before {left: 18px; background: #8FE2C8;}
+}

@@ -1,0 +1,58 @@
+<?php
+return [
+    // Titles
+    'list-title' => 'Staff management',
+    'showing-all-staffs'     => 'Showing All Staffs',
+    'staffs-menu-alt'        => 'Show Staffs Management Menu',
+    'create-new-staff'       => 'Create New Staff',
+    'show-deleted-staff'    => 'Show Deleted Staff',
+    'editing-staff'          => 'Editing Staff :name',
+    'showing-staff'          => 'Showing Staff :name',
+    'showing-staff-title'    => ':name\'s Information',
+    'no-records'            => 'No Records Found',
+
+    // Flash Messages
+    'createSuccess'   => 'Successfully created staff! ',
+    'updateSuccess'   => 'Successfully updated staff! ',
+    'deleteSuccess'   => 'Successfully deleted staff! ',
+    'deleteSelfError' => 'You cannot delete yourself! ',
+    
+    'table' => [
+        'tenure' => 'tenure',
+        'employee_number' => 'employee number',
+        'fullname' => 'employee name',
+        'joined_date' => 'Joined date',
+        'length_of_service' => 'Length of service',
+        'affiliation' => 'Affiliation',
+        'qualification' => 'Qualification',
+        'phone' => 'telephone number',
+        'cellphone' => 'Cellphone number',
+        'address' => 'address',
+        'dob' => 'date of birth',
+        'age' => 'age',
+        'driver_licence' => 'driver licence',
+        'qualification_1' => 'qualification 1',
+        'qualification_2' => 'qualification 2',
+        'qualification_3' => 'qualification 3',
+        'qualification_4' => 'qualification 4',
+        'health' => 'health insurance',
+        'employment' => 'employment insurance',
+        'payment_method' => 'Salary payment method',
+        'gender' => 'sex',
+        'blood_type' => 'blood type',
+        'emergency_contact' => 'emergency contact',
+        'notices' => 'Notices',
+        'caption' => '{1} :staffscount staff total|[2,*] :staffscount total staffs',
+    ],
+
+    'buttons' => [
+        'create-new'    => 'New Staff',
+        'delete'        => '<i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>  <span class="hidden-xs hidden-sm">Delete</span><span class="hidden-xs hidden-sm hidden-md"> Staff</span>',
+        'show'          => '<i class="fa fa-eye fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Show</span><span class="hidden-xs hidden-sm hidden-md"> Staff</span>',
+        'edit'          => '<i class="fa fa-pencil fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Edit</span><span class="hidden-xs hidden-sm hidden-md"> Staff</span>',
+        'back-to-staffs' => '<span class="hidden-sm hidden-xs">Back to </span><span class="hidden-xs">Staffs</span>',
+        'back-to-staff'  => 'Back  <span class="hidden-xs">to Staff</span>',
+        'delete-staff'   => '<i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>  <span class="hidden-xs">Delete</span><span class="hidden-xs"> User</span>',
+        'edit-staff'     => '<i class="fa fa-pencil fa-fw" aria-hidden="true"></i> <span class="hidden-xs">Edit</span><span class="hidden-xs"> Staff</span>',
+    ],
+];

@@ -1,0 +1,194 @@
+@media screen and (min-width: 2000px) {
+    /* MENU ICON */
+    .icon-administrator-solid {
+        width: 28px;
+        height: 28px;
+    }
+
+    .icon-piggy-bank-s {
+        width: 36px;
+        height: 30px;
+    }
+
+    .icon-train {
+        width: 30px;
+        height: 34px;
+    }
+
+    .icon-group {
+        width: 33px;
+        height: 31px;
+    }
+
+    .icon-building {
+        width: 28px;
+        height: 33px;
+    }
+
+    .icon-ios-paper {
+        // background-image: url('/assets/images/icons/ios-paper.png');
+        width: 32px;
+        height: 32px;
+    }
+
+    .icon-note-solid {
+        // background-image: url('/assets/images/icons/note-solid.png');
+        width: 35.5px;
+        height: 35.8px;
+    }
+
+    .icon-view-week {
+        // background-image: url('/assets/images/icons/view-week.png');
+        width: 34px;
+        height: 29.5px;
+    }
+
+    .icon-notes {
+        // background-image: url('/assets/images/icons/notes.png');
+        width: 35.5px;
+        height: 37.9px;
+    }
+
+    .icon-chart-line-data {
+        // background-image: url('/assets/images/icons/chart-line-data.png');
+        width: 28.5px;
+        height: 28.5px;
+    }
+
+    .icon-clipboard-data {
+        // background-image: url('/assets/images/icons/clipboard-data.png');
+        width: 28.5px;
+        height: 32.2px;
+    }
+
+    .icon-calendar {
+        // background-image: url('/assets/images/icons/calendar.png');
+        width: 28.5px;
+        height: 28.5px;
+    }
+
+    .icon-bxs-dashboard {
+        // background-image: url('/assets/images/icons/bxs-dashboard.png');
+        width: 28.5px;
+        // height: 28.5px;
+    }
+
+    .icon-piggy-bank-solid {
+        width: 36px;
+        height: 30.3px;
+    }
+
+    /* FIXED HEADER */
+    .fixed-sidebar {
+        .app-header {
+            height: $app-footer-height-max;
+
+            .app-header__logo .logo-src {
+                height: 66px;
+                width: 137px;
+                width: 50px !important;
+            }
+
+            .app-header__logo .logo-src img {
+                // height: auto;
+                height: 50px;
+                // margin-top: 7px;
+            }
+
+            .app-header__content {
+                .widget-content-left {
+                    .widget-heading {
+                        font-size: 24px;
+                    }
+                    img.avatar { width: 46px; height: 46px;}
+                }
+            }
+
+            .icon-logout {
+                width: 27px;
+                height: 27px;
+            }
+        }
+
+        .app-sidebar {
+            height: calc(100vh - $app-footer-height-max);
+            width: 392px;
+            min-width: 392px;
+            padding-top: 60px;
+
+            .app-sidebar__inner {
+                padding: 10px 1.5rem 5rem 50px;
+            }
+
+            .vertical-nav-menu {
+                li {
+                    padding: 19px 0px 19px 0;
+
+                    a {font-size: 23px;}
+                }
+                li>ul>li .menu_icon {left: 15px;}
+                li>ul>li a {padding: 0 1.5rem 19px 60px;}
+                ul>li>a {padding: 0 2.8rem;}
+                ul:before {left: 13px;}
+                ul { padding: 0em 0 0 0.3rem;}
+                .menu_icon {margin-top: -16px;}
+            }
+        }
+
+        .app-main {
+            .app-main__outer {
+                padding-left: 392px;
+                width: calc(100% - 392px);
+            }
+        }
+    }
+
+    /* FOOTER */
+    .app-footer {
+        height: $app-footer-height-max;
+
+        .app-footer__inner {
+            height: $app-footer-height-max;
+
+            .app-footer-center {padding-top: 17px;}
+        }
+    }
+
+    .app-page-title {
+        .page-title-wrapper {
+            padding: 54px 0px 1em 20px;
+        }
+    }
+
+    /* CLOSED SIDEBAR */
+    .closed-sidebar {
+        .app-sidebar {
+            width: 0px;
+            min-width: 0px;
+        }
+
+        &.fixed-sidebar {
+            .app-main__outer {
+            padding-left: 5px;
+            width: calc(100% - 5px);
+            }
+        }
+
+        &:not(.closed-sidebar-mobile) {
+            .app-header {
+            .app-header__logo {
+                width: auto;
+
+                .logo-src {
+                    display: block;
+                }
+            }
+
+            .header__pane {
+                margin-top: 5px;
+            }
+            }
+
+        }
+    }
+}
