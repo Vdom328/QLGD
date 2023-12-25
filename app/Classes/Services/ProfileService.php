@@ -26,12 +26,10 @@ class ProfileService extends BaseService implements IProfileService
     public function __construct(
         IProfileRepository $profileRepository,
         IUserRepository $userRepository,
-        IUserNotificationRepository $userNotificationRepository,
         IRoleUserRepository $roleUserRepository
     ) {
         $this->profileRepository = $profileRepository;
         $this->userRepository = $userRepository;
-        $this->userNotificationRepository = $userNotificationRepository;
         $this->roleUserRepository = $roleUserRepository;
     }
 
@@ -99,37 +97,13 @@ class ProfileService extends BaseService implements IProfileService
                 "staff_no" => isset($data['staff_no']) ? $data['staff_no'] : ($profile->staff_no ?? null),
                 "first_name" => $data['first_name'],
                 "last_name" => $data['last_name'],
-                "kana_first_name" => $data['kana_first_name'],
-                "kana_last_name" => $data['kana_last_name'],
                 "phone" => $data['phone'],
-                "sub_email" => $data['sub_email'],
-                "is_notification_main_email" => isset($data['is_notification_main_email']) ? $data['is_notification_main_email'] : Config::get('const.profile.no'),
-                "is_notification_sub_email" => isset($data['is_notification_sub_email']) ? $data['is_notification_sub_email'] : Config::get('const.profile.no'),
                 "avatar" => $avatar,
             ];
             if ($profile) {
                 $newProfile = $this->profileRepository->update($profile, $attrProfile);
             } else {
                 $newProfile = $this->profileRepository->create($attrProfile);
-            }
-
-            // update user notification by user_id
-            $userNotification = $this->userNotificationRepository->findOne(['user_id' => $data['id']]);
-            $attrUserNotification = [
-                "user_id" => $data['id'],
-                "todo_add_new_person_in_charge" => isset($data['todo_add_new_person_in_charge']) ? $data['todo_add_new_person_in_charge'] : Config::get('const.user_notification_setting.no'),
-                "todo_expire_date" => isset($data['todo_expire_date']) ? $data['todo_expire_date'] : Config::get('const.user_notification_setting.no'),
-                "todo_add_new" => isset($data['todo_add_new']) ? $data['todo_add_new'] : Config::get('const.user_notification_setting.no'),
-                "before_invoice_due_date" => isset($data['before_invoice_due_date']) ? $data['before_invoice_due_date'] : Config::get('const.user_notification_setting.no'),
-                "deposit_withdrawal_alert" => isset($data['deposit_withdrawal_alert']) ? $data['deposit_withdrawal_alert'] : Config::get('const.user_notification_setting.no'),
-                "driver_information_not_sent" => isset($data['driver_information_not_sent']) ? $data['driver_information_not_sent'] : Config::get('const.user_notification_setting.no'),
-                "before_QB_final_confirmation_deadline" => isset($data['before_QB_final_confirmation_deadline']) ? $data['before_QB_final_confirmation_deadline'] : Config::get('const.user_notification_setting.no'),
-                "before_QB_specification_deadline" => isset($data['before_QB_specification_deadline']) ? $data['before_QB_specification_deadline'] : Config::get('const.user_notification_setting.no'),
-            ];
-            if ($userNotification) {
-                $userNotification = $this->userNotificationRepository->update($userNotification, $attrUserNotification);
-            } else {
-                $userNotification = $this->userNotificationRepository->create($attrUserNotification);
             }
 
             DB::commit();

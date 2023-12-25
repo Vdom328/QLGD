@@ -29,8 +29,6 @@ class UpdateProfileRequest extends FormRequest
             'role' => 'required',
             // 'avatar' => 'nullable|image|max:2048',
             // 'staff_no' => 'required|unique:profiles,staff_no,' . $this->id,
-            'kana_first_name' => 'required|regex:/^[ア-ンｧ-ﾝﾞﾟー]*$/u',
-            'kana_last_name' => 'required|regex:/^[ア-ンｧ-ﾝﾞﾟー]*$/u',
             'phone' => 'required|numeric',
         ];
     }
@@ -55,11 +53,7 @@ class UpdateProfileRequest extends FormRequest
             // 'staff_no.required' => 'スタッフ番号は必須です。',
             // 'staff_no.unique' => 'このスタッフ番号は既に存在しています。',
 
-            'kana_first_name.required' => 'カナ姓は必須です。',
-            'kana_first_name.regex' => 'カナ姓は全角カタカナで入力してください。',
-
-            'kana_last_name.required' => 'カナ名は必須です。',
-            'kana_last_name.regex' => 'カナ名は全角カタカナで入力してください。',
+            
 
             'phone.required' => '電話番号は必須です。',
             'phone.numeric' => '有効な電話番号を入力してください。',

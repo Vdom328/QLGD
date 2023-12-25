@@ -29,8 +29,6 @@ class StaffRequest extends FormRequest
             'role' => 'required',
             'avatar' => 'nullable|image|max:2048',
             'staff_no' => ['required', 'numeric', 'digits:4', Rule::unique('profiles')->ignore($this->id, 'user_id')],
-            'kana_first_name' => 'required|regex:/^[ア-ンｧ-ﾝﾞﾟー]*$/u',
-            'kana_last_name' => 'required|regex:/^[ア-ンｧ-ﾝﾞﾟー]*$/u',
             'phone' => 'required|numeric',
             'password' => 'required'
         ];
@@ -60,12 +58,6 @@ class StaffRequest extends FormRequest
             'staff_no.unique' => 'このスタッフ番号は既に存在しています。',
             'staff_no.numeric' => 'スタッフ番号は数字で入力してください。',
             'staff_no.digits' => 'スタッフ番号は4桁で入力してください。',
-
-            'kana_first_name.required' => 'カナ姓は必須です。',
-            'kana_first_name.regex' => 'カナ姓は全角カタカナで入力してください。',
-
-            'kana_last_name.required' => 'カナ名は必須です。',
-            'kana_last_name.regex' => 'カナ名は全角カタカナで入力してください。',
 
             'phone.required' => '電話番号は必須です。',
             'phone.numeric' => '有効な電話番号を入力してください。',

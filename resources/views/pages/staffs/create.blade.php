@@ -98,30 +98,6 @@
                     <p class="w-100 error">{{ $errors->first('last_name') }}</p>
                 </div>
             </div>
-            {{-- fisrt name and last name kata --}}
-            <div class="row d-flex flex-wrap align-items-center">
-                <div class="col-md-2 col-12 text-md-end">フリガナ</div>
-                <div class="row col-md-10 col-12 d-flex align-items-center">
-                    <div class="col-md-3 col-6">
-                        <input type="text" class="form-control" placeholder="セイ" name="kana_first_name"
-                            value="{{ old('kana_first_name') }}">
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <input type="text" class="form-control" placeholder="メイ" name="kana_last_name"
-                            value="{{ old('kana_last_name') }}">
-                    </div>
-
-                </div>
-            </div>
-            <div class="row d-flex flex-wrap align-items-center ">
-                <div class="col-md-2 col-12 text-md-end"></div>
-                <div class="row col-md-10 col-12 d-flex align-items-center">
-                    @if ($errors->has('kana_first_name'))
-                        <p class="w-100 error mb-0">{{ $errors->first('kana_first_name') }}</p>
-                    @endif
-                    <p class="w-100 error">{{ $errors->first('kana_last_name') }}</p>
-                </div>
-            </div>
             {{-- phone number --}}
             <div class="row d-flex flex-wrap align-items-center mb-2">
                 <div class="col-md-2 col-12 text-md-end">電話番号</div>
@@ -138,7 +114,7 @@
                     <p class="w-100 error">{{ $errors->first('phone') }}</p>
                 </div>
             </div>
-            {{-- TERAS --}}
+            {{-- email --}}
             <div class="row d-flex flex-wrap align-items-center mb-2">
                 <div class="col-md-2 col-12 text-md-end">メインアドレス</div>
                 <div class="row col-md-10 col-12 d-flex flex-wrap align-items-center">
@@ -159,29 +135,6 @@
                 <div class="col-md-2 col-12 text-md-end"></div>
                 <div class="row col-md-10 col-12 d-flex align-items-center">
                     <p class="w-100 error">{{ $errors->first('email') }}</p>
-                </div>
-            </div>
-            {{-- enblue --}}
-            <div class="row d-flex flex-wrap align-items-center mb-2">
-                <div class="col-md-2 col-12 text-md-end">サブアドレス</div>
-                <div class="row col-md-10 col-12 d-flex flex-wrap align-items-center">
-                    <div class="col-md-6 col-12">
-                        <input type="text" class="form-control" placeholder="enblueアドレス" name="sub_email"
-                            value="{{ old('sub_email') }}">
-                    </div>
-                    <div class="col-md-6 col-12">
-                        <label for="enblue">
-                            <input type="checkbox" class="me-1" id="enblue" name="is_notification_sub_email"
-                                value="1">
-                            このメールで通知を受け取る
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="row d-flex flex-wrap align-items-center ">
-                <div class="col-md-2 col-12 text-md-end"></div>
-                <div class="row col-md-10 col-12 d-flex align-items-center">
-                    <p class="w-100 error">{{ $errors->first('sub_email') }}</p>
                 </div>
             </div>
             {{-- password --}}
@@ -230,67 +183,6 @@
                 </div>
                 <label class="form-check-label me-2 d-none" id="checkbox-on">有効</label>
                 <label class="form-check-label me-2 d-none" id="checkbox-off">無効</label>
-            </div>
-            {{--  --}}
-            <div class="row d-flex flex-wrap align-items-center mb-3">
-                <div class="col-12">メール通知設定</div>
-            </div>
-            {{--  --}}
-            <div class=" d-flex flex-wrap align-items-center mb-3 noti-email col-xl-10 col-12">
-                <div class="col-12 mb-3">
-                    <label>
-                        <input type="checkbox" class="me-1  cursor-pointer" name="todo_add_new_person_in_charge"
-                            value="1">
-                        自分が担当のToDoが発生した時
-                    </label>
-                </div>
-                <div class="col-12 mb-3">
-                    <label>
-                        <input type="checkbox" class="me-1  cursor-pointer" name="todo_expire_date" value="1">
-                        自分が担当のToDoの期限通知
-                    </label>
-                </div>
-                <div class="col-12 mb-3">
-                    <label>
-                        <input type="checkbox" class="me-1  cursor-pointer" name="todo_add_new" value="1">
-                        自分が登録者のToDoの期限通知
-                    </label>
-                </div>
-                <div class="col-12 mb-3">
-                    <label>
-                        <input type="checkbox" class="me-1  cursor-pointer" name="before_invoice_due_date"
-                            value="1">
-                        請求書未発行の期限日の前日(営業日)
-                    </label>
-                </div>
-                <div class="col-12 mb-3">
-                    <label>
-                        <input type="checkbox" class="me-1  cursor-pointer" name="deposit_withdrawal_alert"
-                            value="1">
-                        入出金アラートが発生した時
-                    </label>
-                </div>
-                <div class="col-12 mb-3">
-                    <label>
-                        <input type="checkbox" class="me-1  cursor-pointer" name="driver_information_not_sent"
-                            value="1">
-                        ドライバー情報未送信
-                    </label>
-                </div>
-                <div class="col-12 mb-3">
-                    <label>
-                        <input type="checkbox" class="me-1  cursor-pointer" name="before_QB_final_confirmation_deadline"
-                            value="1">
-                        QB最終確認の期限日の前日 (営業日)
-                    </label>
-                </div>
-                <div class="col-12 mb-3">
-                    <label>
-                        <input type="checkbox" class="me-1  cursor-pointer" name="before_QB_specification_deadline"
-                            value="1">
-                        QB仕様書の期限の前日 (営業日)
-                    </label>
-                </div>
             </div>
         </div>
         <div class="col-12 d-flex">

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('avatar')->nullable();
             $table->string('phone', 20)->nullable();
-            $table->string('sub_email')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
