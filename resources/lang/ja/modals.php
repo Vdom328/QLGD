@@ -11,23 +11,24 @@ return [
     |
     */
 
-    // Default Save Modal;
-    'confirm_modal_title_text'    => '保存の確認',
-    'confirm_modal_title_std_msg' => 'Please confirm your request.',
+    // Hộp thoại Lưu mặc định;
+    'confirm_modal_title_text'    => 'Xác nhận lưu',
+    'confirm_modal_title_std_msg' => 'Vui lòng xác nhận yêu cầu của bạn.',
 
-    // Confirm Save Modal;
-    'confirm_modal_button_save_text'        => 'はい',
+    // Hộp thoại Xác nhận Lưu;
+    'confirm_modal_button_save_text'        => 'Có',
     'confirm_modal_button_save_icon'        => 'fa-save',
-    'confirm_modal_button_cancel_text'      => 'いいえ',
+    'confirm_modal_button_cancel_text'      => 'Không',
     'confirm_modal_button_cancel_icon'      => 'fa-times',
-    'edit_user__modal_text_confirm_title'   => '保存の確認',
-    'edit_user__modal_text_confirm_message' => '変更を保存しますか？',
+    'edit_user__modal_text_confirm_title'   => 'Xác nhận lưu',
+    'edit_user__modal_text_confirm_message' => 'Bạn có muốn lưu các thay đổi không?',
 
-    // Form Modal
-    'form_modal_default_title'      => 'はい',
-    'form_modal_default_message'    => 'Please Confirm',
-    'form_modal_default_btn_cancel' => 'いいえ',
-    'form_modal_default_btn_submit' => 'はい',
-    'form_modal_default_btn_delete' => 'Delete',
+    // Hộp thoại Form
+    'form_modal_default_title'      => 'Có',
+    'form_modal_default_message'    => 'Xin Vui lòng Xác nhận',
+    'form_modal_default_btn_cancel' => 'Không',
+    'form_modal_default_btn_submit' => 'Có',
+    'form_modal_default_btn_delete' => 'Xóa',
+
 
 ];

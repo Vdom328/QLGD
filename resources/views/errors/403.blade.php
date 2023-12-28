@@ -30,8 +30,8 @@
     <div class="col-12">
         <div class="mt-5 ">
             <h1 class="mt-5 ">403 Forbidden!</h1>
-            <h2>アクセスしようとしたページは表示できませんでした。</h2>
-            <h4>このエラーは、表示するページへのアクセス許可がなかったことを意味します。</h4>
+            <h2>Trang bạn cố truy cập không thể được hiển thị.</h2>
+            <h4>Lỗi này có nghĩa là bạn không có quyền truy cập vào trang bạn đang xem.</h4>
         </div>
     </div>
 </div>

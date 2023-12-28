@@ -17,8 +17,8 @@ enum StaffStatusEnum: int
     public function label(): string
     {
         return match($this) {
-            StaffStatusEnum::INVALID => '無効',
-            StaffStatusEnum::VALID => '有効',
+            StaffStatusEnum::INVALID => 'Vô hiệu hóa',
+            StaffStatusEnum::VALID => 'Có hiệu lực',
         };
     }
 }

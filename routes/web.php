@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClassRoomController;
 use App\Http\Controllers\StaffsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -41,7 +42,11 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/sort-data', [StaffsController::class, 'sortStaffs'])->name('staffs.sort');
         });
 
-
+        Route::group(['prefix' => 'class-room'], function () {
+            Route::get('/', [ClassRoomController::class, 'index'])->name('classroom.index');
+            Route::get('/create', [ClassRoomController::class, 'create'])->name('classroom.create');
+            Route::post('/post-register', [ClassRoomController::class, 'postRegister'])->name('classroom.postRegister');
+        });
     });
 
 

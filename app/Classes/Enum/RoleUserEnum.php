@@ -17,8 +17,8 @@ enum RoleUserEnum: int
     public function label(): string
     {
         return match($this) {
-            RoleUserEnum::ADMIN => '管理者',
-            RoleUserEnum::STAFF => 'スタッフ',
+            RoleUserEnum::ADMIN => 'Admin',
+            RoleUserEnum::STAFF => 'Teacher',
         };
     }
 }

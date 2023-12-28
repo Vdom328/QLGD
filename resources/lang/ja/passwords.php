@@ -12,9 +12,9 @@ return [
     |
     */
 
-    'reset'     => 'パスワードをリセットしました。',
-    'sent'      => 'パスワードリマインダーを送信しました。',
-    'throttled' => '時間を置いて再度お試しください。',
-    'token'     => 'このパスワードリセットトークンは無効です。',
-    'user'      => 'このメールアドレスに一致するユーザーを見つけることが出来ませんでした。',
+    'reset'     => 'Mật khẩu của bạn đã được thiết lập lại.',
+    'sent'      => 'Lời nhắc mật khẩu đã được gửi.',
+    'throttled' => 'Vui lòng thử lại sau.',
+    'token'     => 'Mã thông báo đặt lại mật khẩu này không hợp lệ. .',
+    'user'      => 'Không tìm thấy người dùng nào phù hợp với địa chỉ email này.',
 ];

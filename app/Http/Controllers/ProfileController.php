@@ -50,10 +50,10 @@ class ProfileController extends Controller
     {
         $update = $this->profileService->updateProfileOrCreateProfile($request->all());
         if ($update == false) {
-            Session::flash('error', "エラーが発生しました。もう一度やり直してください !");
+            Session::flash('error', "Một lỗi đã xảy ra. Vui lòng thử lại !");
             return redirect()->back();
         }
-        Session::flash('success', "プロファイルを正常に編集しました !");
+        Session::flash('success', "Bạn đã chỉnh sửa thành công hồ sơ của mình !");
         return redirect()->route('profile.index', $request->id);
     }
 

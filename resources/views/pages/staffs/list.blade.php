@@ -4,13 +4,13 @@
     <img style="width: 21.5px !important; height: 21.5px;" src="{{ asset('assets/images/icons/administrator-solid.png') }}" class="menu_icon icon-group" />
 @endsection
 @section('page_title')
-    スタッフ設定
+    Cài đặt người dùng
 @endsection
 @section('title-page')
-    スタッフ設定
+    Cài đặt người dùng
 @endsection
 @section('template_title')
-    {!! trans('staffsmanagement.showing-all-staffs') !!}
+Cài đặt người dùng
 @endsection
 
 @section('template_linked_css')
@@ -35,20 +35,24 @@
 @endsection
 
 @section('page_title')
-    {!! trans('staffsmanagement.list-title') !!}
+Cài đặt người dùng
 @endsection
 
 @section('page_title_actions')
-    <div>> スタッフ設定</div>
+    <div class="col-12 d-flex flex-wrap align-items-center">
+        <div class="col-md-6 col-12 ">
+            <i class="fas fa-angle-right"></i> Cài đặt người dùng
+        </div>
+        <div class="d-flex col-md-6 col-12  mt-md-0 mt-2  justify-content-end">
+            @include('components.btn-create-new', ['url' => route('staffs.create')])
+        </div>
+    </div>
 @endsection
 
 @section('content')
     <div class="d-flex col-12 mt-2 align-items-center">
         <div class="col-6 mt-3">
-            <input id="filter-staff" type="checkbox" class=" cursor-pointer"> <label for="filter-staff" class=" cursor-pointer">無効なスタッフを非表示</label>
-        </div>
-        <div class="d-flex col-6  justify-content-end">
-            @include('components.btn-create-new', ['url' => route('staffs.create')])
+            <input id="filter-staff" type="checkbox" class=" cursor-pointer"> <label for="filter-staff" class=" cursor-pointer">Ẩn nhân viên đã vô hiệu hóa</label>
         </div>
     </div>
     <div class="row mt-2">

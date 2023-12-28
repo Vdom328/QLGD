@@ -15,9 +15,9 @@
             </a></td>
         <td><a class="text-decoration-underline"
                 href="{{ route('staffs.update', $staff->id) }}">{!! $staff->email !!}</a></td>
-        <td>{{ $staff->level() == \App\Classes\Enum\RoleUserEnum::ADMIN->value ? 'スタッフ' : '管理者' }}</td>
+        <td>{{ $staff->level() == \App\Classes\Enum\RoleUserEnum::ADMIN->value ? 'Admin' : 'Teacher' }}</td>
         <td>{!! $staff->created_at->format('Y/m/d') !!}</td>
-        <td>{!! $staff->status == \App\Classes\Enum\StaffStatusEnum::INVALID->value ? '無効' : '有効' !!}
+        <td>{!! $staff->status == \App\Classes\Enum\StaffStatusEnum::VALID->value ? 'Có hiệu lực' : 'Vô hiệu hóa' !!}
         </td>
     </tr>
 @endforeach

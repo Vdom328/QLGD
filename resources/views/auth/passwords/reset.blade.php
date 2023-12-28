@@ -16,7 +16,7 @@
                         <input type="hidden" name="token" value="{{ $token }}">
                         <div class="col-12 ">
                             <div class="col-12 mb-3">
-                                <label for="email" class="col-md-4 col-form-label ">{{ __('メールアドレス') }}</label>
+                                <label for="email" class="col-md-4 col-form-label ">{{ __('Địa chỉ Email') }}</label>
 
                                 <div class="col-md-12">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"

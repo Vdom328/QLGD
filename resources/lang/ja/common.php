@@ -2,19 +2,19 @@
 
 return [
     'btn'  =>  [
-        'view'             => '表示',
-        'export_csv'       => 'CSV出力',
-        'delete'           => '<i class="fa fa-trash fa-fw" aria-hidden="true"></i>  <span class="hidden-xs hidden-sm">削除</span></i>',
-        'edit'             => '<i class="fa fa-pencil fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">編集</span></i>',
-        'back'             => '一覧に戻る',
+        'view'             => 'Hiển thị',
+        'export_csv'       => 'Export CSV',
+        'delete'           => '<i class="fa fa-trash fa-fw" aria-hidden="true"></i>  <span class="hidden-xs hidden-sm">Xóa</span></i>',
+        'edit'             => '<i class="fa fa-pencil fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Sửa</span></i>',
+        'back'             => 'Trở lại',
     ],
     'date' => [
-        'Mon' => '月',
-        'Tue' => '火',
-        'Wed' => '水',
-        'Thu' => '木',
-        'Fri' => '金',
-        'Sat' => '土',
-        'Sun' => '日',
+        'Mon' => 'Thứ 2',
+        'Tue' => 'Thứ 3',
+        'Wed' => 'Thứ 4',
+        'Thu' => 'THứ 5',
+        'Fri' => 'Thứ 6',
+        'Sat' => 'Thứ 7',
+        'Sun' => 'Chủ nhật',
     ],
 ];

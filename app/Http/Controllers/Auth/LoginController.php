@@ -60,8 +60,8 @@ class LoginController extends Controller
             $this->username() => 'required|string',
             'password' => 'required|string',
         ], [
-            $this->username() . '.required' => 'メールアドレスを入力してください!',
-            'password.required' => 'パスワードを入力してください!',
+            $this->username() . '.required' => 'Hãy điền địa chỉ email của bạn!',
+            'password.required' => 'Vui lòng nhập mật khẩu của bạn!',
         ]);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
@@ -78,7 +78,7 @@ class LoginController extends Controller
 
         $user = $this->userService->getUserByEmail($request->input($this->username()));
         if ($user && $user->status === 0) {
-            return redirect()->route('login')->withErrors(['message' => 'あなたのアカウントは無効になっています!']);
+            return redirect()->route('login')->withErrors(['message' => 'Tài khoản của bạn đã bị vô hiệu hóa!']);
         }
 
         if ($this->attemptLogin($request)) {

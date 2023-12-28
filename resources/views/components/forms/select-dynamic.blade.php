@@ -7,7 +7,7 @@
             {{$attrName}} = {{$attrVal}}
         @endforeach>
         @if ($isCanEmptyVal)
-            <option value="">選択してください</option>
+            <option value="">Vui lòng chọn</option>
         @endif
         @if ($items)
             @foreach($items as $key => $item)

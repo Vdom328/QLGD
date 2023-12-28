@@ -41,22 +41,22 @@ class UpdateProfileRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => 'メールアドレスは必須です。',
-            'email.email' => '正しいメールアドレス形式で入力してください。',
-            'email.regex' => '正しいメールアドレス形式で入力してください。',
-            'email.unique' => 'このメールアドレスは既に存在しています。',
-            'role.required' => 'ロールは必須です。',
+            'email.required' => 'Địa chỉ email là bắt buộc.',
+            'email.email' => 'Vui lòng nhập đúng định dạng địa chỉ email.',
+            'email.regex' => 'Vui lòng nhập đúng định dạng địa chỉ email.',
+            'email.unique' => 'Địa chỉ email này đã tồn tại.',
+            'role.required' => 'Vai trò là bắt buộc.',
 
-            'avatar.image' => '画像ファイルを選択してください。',
-            'avatar.max' => '画像ファイルサイズは最大2048キロバイトまでです。',
+            'avatar.image' => 'Vui lòng chọn một tập tin ảnh.',
+            'avatar.max' => 'Kích thước tập tin ảnh tối đa là 2048 kilobytes.',
 
             // 'staff_no.required' => 'スタッフ番号は必須です。',
             // 'staff_no.unique' => 'このスタッフ番号は既に存在しています。',
 
-            
 
-            'phone.required' => '電話番号は必須です。',
-            'phone.numeric' => '有効な電話番号を入力してください。',
+
+            'phone.required' => 'Số điện thoại là bắt buộc.',
+            'phone.numeric' => 'Vui lòng nhập một số điện thoại hợp lệ.',
         ];
     }
 }

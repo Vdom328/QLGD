@@ -12,6 +12,6 @@ return [
     |
     */
 
-    'failed'   => '認証情報と一致するレコードがありません。',
-    'throttle' => 'ログインの試行回数が多すぎます。:seconds 秒後にお試しください。',
+    'failed'   => 'Không có hồ sơ nào phù hợp với thông tin xác thực của bạn.',
+    'throttle' => 'Quá nhiều lần thử đăng nhập.:seconds Vui lòng thử lại sau vài giây.',
 ];

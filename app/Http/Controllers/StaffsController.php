@@ -78,10 +78,10 @@ class StaffsController extends Controller
     {
         $update = $this->profileService->updateProfileOrCreateProfile($request->all());
         if ($update == false) {
-            Session::flash('error', "エラーが発生しました。もう一度やり直してください !");
+            Session::flash('error', "Một lỗi đã xảy ra. Vui lòng thử lại !");
             return redirect()->back();
         }
-        Session::flash('success', "追加しました。");
+        Session::flash('success', "Thêm thành công !");
         return redirect()->route('staffs');
     }
 
@@ -110,10 +110,10 @@ class StaffsController extends Controller
     {
         $update = $this->profileService->updateProfileOrCreateProfile($request->all());
         if ($update == false) {
-            Session::flash('error', "エラーが発生しました。もう一度やり直してください !");
+            Session::flash('error', "Một lỗi đã xảy ra. Vui lòng thử lại !");
             return redirect()->back();
         }
-        Session::flash('success', "プロファイルを正常に編集しました !");
+        Session::flash('success', "Chỉnh sửa thành công !");
         return redirect()->route('staffs');
     }
 

@@ -55,7 +55,7 @@ class ForgotPasswordController extends Controller
     protected function validateEmail(Request $request)
     {
         $request->validate(['email' => 'required|email'], [
-            'email.required' => 'メールアドレスを入力してください!',
+            'email.required' => 'Hãy điền địa chỉ email của bạn!',
         ]);
     }
 }

@@ -59,31 +59,7 @@ function skReadCsvFromLine(string $line): array
     return preg_replace($lineReplacePattern, $aryCsvReplaceValue, $ary);
 }
 
-if (!function_exists('closingDateName')) {
-    function closingDateName($value)
-    {
-        if ($value == CompanyDateEnum::EachTime->value) {
-            return '都度';
-        }
-        if ($value == CompanyDateEnum::LastDayOfMonth->value) {
-            return '月末';
-        }
-        return "{$value}日";
-    }
-}
 
-if (!function_exists('paymentDateName')) {
-    function paymentDateName($value)
-    {
-        if ($value == CompanyDateEnum::EachTime->value) {
-            return '都度';
-        }
-        if ($value == CompanyDateEnum::LastDayOfMonth->value) {
-            return '月末';
-        }
-        return "{$value}日";
-    }
-}
 
 /**
  * First character of user name
@@ -109,37 +85,6 @@ if (!function_exists('convertInputMaskToNumber')) {
         $numberValue = preg_replace('/\D/', '', $value);
         $parsedNumber = intval($numberValue);
         return $value = $parsedNumber;
-    }
-}
-
-/**
- * Check the user has restricted permissions on the control screen
- * @param $user
- * @param $dailyNote
- * @return bool
- */
-if (!function_exists('userHavePermission')) {
-    function userHavePermission(User $user, ?ControlDailyNote $dailyNote)
-    {
-        if ($dailyNote && $dailyNote->approval != null && $user->id != $dailyNote->approval) {
-            return false;
-        }
-        return true;
-    }
-}
-
-/**
- * check the date has been blocked from editing
- * @param $dailyNote
- * @return bool
- */
-if (!function_exists('isDateBlocked')) {
-    function isDateBlocked(?ControlDailyNote $dailyNote)
-    {
-        if ($dailyNote && $dailyNote->approval != null) {
-            return true;
-        }
-        return false;
     }
 }
 

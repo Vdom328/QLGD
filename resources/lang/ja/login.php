@@ -9,10 +9,11 @@ return [
     |
     */
 
-    'screen_name' => 'ログイン',
-    'label_id' => 'ログインID',
-    'label_password' => 'パスワード',
-    'label_remember_me' => ' ログインデータを保存しますか？',
-    'label_forgot_your_pwd' => 'パスワードを忘れた方はこちら',
-    'btn_submit' => 'ログイン'
+    'screen_name' => 'Đăng nhập',
+    'label_id' => 'Tài khoản',
+    'label_password' => 'Mật khẩu',
+    'label_remember_me' => 'Ghi nhớ đăng nhập?',
+    'label_forgot_your_pwd' => 'Quên mật khẩu?',
+    'btn_submit' => 'Đăng nhập'
+
 ];

@@ -13,7 +13,7 @@
     </div>
     <a class="d-flex align-items-center" href="{{route('home')}}">
         <div class="logo-src d-flex align-items-center"><img src="{{ asset('images/solar_logo.png') }}" /></div>
-        <h3 class="text-logo ms-2 text-dark mb-1">Order Manager</h3>
+        <h3 class="text-logo ms-2 text-dark mb-1">Quản lý giảng đường</h3>
     </a>
 </div>
 <div class="app-header__mobile-menu">

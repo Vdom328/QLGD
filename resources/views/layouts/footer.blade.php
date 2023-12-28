@@ -1,8 +1,8 @@
 <div class="app-footer border-top">
     <div class="app-footer__inner text-center">
         <div class="app-footer-center">
-            <div>©︎ Order Manager</div>
-            <div>このサイトはプライバシー保護のためSSL暗号化通信を使用しています。</div>
+            <div>©︎ Quản lý giảng đường</div>
+            <div>Phát triển bởi sinh viên: Lù Văn Tù</div>
         </div>
     </div>
 </div>

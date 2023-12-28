@@ -1,11 +1,9 @@
 <div class="app-sidebar sidebar-shadow">
-    {{-- @include('layouts.header.logo') --}}
-
     <div class="scrollbar-sidebar">
         <div class="app-sidebar__inner">
             <ul class="vertical-nav-menu">
                 <li>
-                    <a href="#" class="ps-0 text-sidebar"> 設定 </a>
+                    <a href="#" class="ps-0 text-sidebar"> Cài đặt </a>
                     <ul class="mm-collapse mm-show">
                         <li>
                             <a href="{{ route('staffs') }}"
@@ -15,7 +13,16 @@
                                     {{ strpos(Route::currentRouteName(), 'profile.index') === 0 ? 'mm-active' : '' }}">
                                 <img src="{{ asset('assets/images/icons/administrator-solid.png') }}"
                                     class="menu_icon icon-bxs-dashboard" />
-                                スタッフ設定
+                                Cài đặt người dùng
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('classroom.index') }}"
+                                class="{{ strpos(Route::currentRouteName(), 'classroom.index') === 0 ? 'mm-active' : '' }}
+                                       {{ strpos(Route::currentRouteName(), 'classroom.create') === 0 ? 'mm-active' : '' }}">
+                                <img src="{{ asset('assets/images/icons/ios-paper.png') }}"
+                                    class="menu_icon icon-bxs-dashboard" />
+                                Cài đặt phòng học
                             </a>
                         </li>
                     </ul>

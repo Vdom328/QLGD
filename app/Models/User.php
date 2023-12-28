@@ -124,18 +124,12 @@ class User extends Authenticatable
     /**
      * user has one  user notification setting
      */
-    public function UserNotificationSetting()
-    {
-        return $this->hasOne(\App\Models\UserNotificationSetting::class);
-    }
+
 
     public function roleUser()
     {
         return $this->hasOne(\App\Models\RoleUser::class);
     }
 
-    public function supplier_manager()
-    {
-        return $this->hasOne(\App\Models\SupplierManagers::class, 'id', 'person_in_charge_id');
-    }
+
 }

@@ -7,4 +7,9 @@ return [
             'no' => ProfileEnum::No,
             'yes' => ProfileEnum::Yes,
     ],
+    'status' => [
+        'no' => 1,
+        'yes' => 0,
+    ],
+    'pagination' => 2,
 ];

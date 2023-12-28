@@ -16,7 +16,7 @@
                         @csrf
 
                         <div class="row col-12 mb-3">
-                            <label for="email" class="col-md-12 col-form-label ">{{ __('電子メールアドレス') }}</label>
+                            <label for="email" class="col-md-12 col-form-label ">{{ __('Địa chỉ email') }}</label>
 
                             <div class="col-md-12">
                                 <input id="email" type="email"
@@ -34,7 +34,7 @@
                         <div class=" mb-0 text-center">
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-dark btn-thefarm-default col-4 mt-3 ">
-                                    {{ __('パスワードリセットリンクを送信する') }}
+                                    {{ __('Gửi liên kết đặt lại mật khẩu') }}
                                 </button>
                             </div>
                         </div>

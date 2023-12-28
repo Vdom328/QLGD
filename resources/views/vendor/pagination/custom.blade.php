@@ -32,13 +32,14 @@
             <div class="d-none flex-sm-fill d-sm-flex align-items-sm-center justify-content-sm-between">
                 <div>
                     <p class="small text-muted">
-                        <span> 全 </span>
-                        <span class="fw-semibold">{{ $paginator->total() }}</span>
-                        <span> 件中 </span>
+                        <span> Hiển thị </span>
                         <span class="fw-semibold">{{ $paginator->firstItem() }}</span>
-                        <span> 件～ </span>
+                        <span> ～ </span>
                         <span class="fw-semibold">{{ $paginator->lastItem() }}</span>
-                        <span> 件を表示 </span>
+                        <span> Mục </span>
+                        <span> trong tổng số </span>
+                        <span class="fw-semibold">{{ $paginator->total() }}</span>
+
                     </p>
                 </div>
 
@@ -47,12 +48,12 @@
                         {{-- Previous Page Link --}}
                         @if ($paginator->onFirstPage())
                             <li class="page-item  disabled" aria-disabled="true">
-                                <span class="page-link rounded-circle" aria-hidden="true">＜前へ</span>
+                                <span class="page-link rounded-circle" aria-hidden="true">＜Trước đó</span>
                             </li>
                         @else
                             <li class="page-item ">
                                 <a class="page-link rounded-circle" href="{{ $paginator->previousPageUrl() }}"
-                                    rel="prev">＜前へ</a>
+                                    rel="prev">＜Trước đó</a>
                             </li>
                         @endif
 
@@ -82,11 +83,11 @@
                         @if ($paginator->hasMorePages())
                             <li class="page-item">
                                 <a class="page-link rounded-circle" href="{{ $paginator->nextPageUrl() }}"
-                                    rel="next" >次へ＞</a>
+                                    rel="next" >Tiếp theo＞</a>
                             </li>
                         @else
                             <li class="page-item disabled" aria-disabled="true" >
-                                <span class="page-link rounded-circle" aria-hidden="true">次へ＞</span>
+                                <span class="page-link rounded-circle" aria-hidden="true">Tiếp theo＞</span>
                             </li>
                         @endif
                     </ul>

@@ -43,26 +43,27 @@ class StaffRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'first_name.required' => 'お名前を入力してください。',
-            'last_name.required' => '姓を入力してください。',
-            'email.required' => 'メールアドレスは必須です。',
-            'email.email' => '正しいメールアドレス形式で入力してください。',
-            'email.regex' => '正しいメールアドレス形式で入力してください。',
-            'email.unique' => 'このメールアドレスは既に存在しています。',
-            'role.required' => 'ロールは必須です。',
+            'first_name.required' => 'Vui lòng nhập tên của bạn.',
+            'last_name.required' => 'Vui lòng nhập họ của bạn.',
+            'email.required' => 'Địa chỉ email là bắt buộc.',
+            'email.email' => 'Vui lòng nhập đúng định dạng địa chỉ email.',
+            'email.regex' => 'Vui lòng nhập đúng định dạng địa chỉ email.',
+            'email.unique' => 'Địa chỉ email này đã tồn tại.',
+            'role.required' => 'Vai trò là bắt buộc.',
 
-            'avatar.image' => '画像ファイルを選択してください。',
-            'avatar.max' => '画像ファイルサイズは最大2048キロバイトまでです。',
+            'avatar.image' => 'Vui lòng chọn một tập tin ảnh.',
+            'avatar.max' => 'Kích thước tập tin ảnh tối đa là 2048 kilobytes.',
 
-            'staff_no.required' => 'スタッフ番号は必須です。',
-            'staff_no.unique' => 'このスタッフ番号は既に存在しています。',
-            'staff_no.numeric' => 'スタッフ番号は数字で入力してください。',
-            'staff_no.digits' => 'スタッフ番号は4桁で入力してください。',
+            'staff_no.required' => 'Số nhân viên là bắt buộc.',
+            'staff_no.unique' => 'Số nhân viên này đã tồn tại.',
+            'staff_no.numeric' => 'Số nhân viên phải được nhập bằng số.',
+            'staff_no.digits' => 'Số nhân viên phải có 4 chữ số.',
 
-            'phone.required' => '電話番号は必須です。',
-            'phone.numeric' => '有効な電話番号を入力してください。',
+            'phone.required' => 'Số điện thoại là bắt buộc.',
+            'phone.numeric' => 'Vui lòng nhập một số điện thoại hợp lệ.',
 
-            'password.required' => 'パスワードフィールドは必須です',
+            'password.required' => 'Trường mật khẩu là bắt buộc',
+
         ];
     }
 }

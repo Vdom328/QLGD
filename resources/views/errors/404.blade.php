@@ -15,10 +15,10 @@
 <div class="error-page">
     <h2 class="headline text-warning me-md-0 me-md-3"> 404</h2>
     <div class="error-content">
-        <h3><i class="fas fa-exclamation-triangle text-warning"></i> お探しのページはありません</h3>
+        <h3><i class="fas fa-exclamation-triangle text-warning"></i> Trang bạn đang tìm kiếm không tồn tại</h3>
         <span>
-            申し訳ございませんが、指定のページは削除されたか、移動された可能性があります。<br>
-            その間、<a href="{{ route('home') }}">ダッシュボードに戻る</a>こともできます。
+            Chúng tôi xin lỗi nhưng trang bạn chỉ định có thể đã bị xóa hoặc di chuyển. <br>
+             Trong thời gian chờ đợi, bạn cũng có thể <a href="{{ Route('home') }}">quay lại trang tổng quan của mình</a>.
         </span>
     </div>
 </div>

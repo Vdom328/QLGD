@@ -15,14 +15,14 @@
 @endsection
 
 @section('page_title')
-    スタッフ設定
+    Cài đặt người dùng
 @endsection
 @section('title-page')
-    スタッフ設定
+Cài đặt người dùng
 @endsection
 
 @section('page_title_actions')
-    <div>> スタッフ設定 > スタッフ編集</div>
+    <div><i class="fas fa-angle-right"></i> Cài đặt người dùng <i class="fas fa-angle-right"></i> Chỉnh sửa</div>
 @endsection
 
 @section('content')
@@ -38,13 +38,13 @@
         <div class="col-md-8 col-12">
             {{-- role --}}
             <div class="row d-flex flex-wrap align-items-center ">
-                <div class="col-md-2 col-12 text-md-end">権限</div>
+                <div class="col-md-2 col-12 text-md-end">Quyền</div>
                 <div class="row col-md-10 col-12 d-flex align-items-center">
                     <div class="col-md-4 col-12">
                         @if (isAdmin() == false)
                             <select name="role" id="role" class="form-select"
                                 @if (isAdmin()) disabled @endif>
-                                <option value="">選択してください</option>
+                                <option value="">Vui lòng chọn</option>
                                 @foreach ($roles as $role)
                                     <option value="{{ $role->id }}" @if ($role->id == $user->roleUser->role_id) selected @endif>
                                         {{ $role->name }}</option>
@@ -67,7 +67,7 @@
             </div>
             {{-- staff no --}}
             <div class="row d-flex flex-wrap align-items-center ">
-                <div class="col-md-2 col-12 text-md-end">スタッフ番号</div>
+                <div class="col-md-2 col-12 text-md-end">Mã số ND</div>
                 <div class="row  col-md-10 col-12 d-flex align-items-center">
 
                     <div class="col-md-4 col-8">
@@ -86,7 +86,7 @@
             </div>
             {{-- fisrt naem and last name --}}
             <div class="row d-flex flex-wrap align-items-center">
-                <div class="col-md-2 col-12 text-md-end">スタッフ名</div>
+                <div class="col-md-2 col-12 text-md-end">Tên ND</div>
                 <div class="row col-md-10 col-12 d-flex align-items-center">
                     <div class="col-md-3 col-6">
                         <input type="text" class="form-control" placeholder="姓"
@@ -109,7 +109,7 @@
             </div>
             {{-- phone number --}}
             <div class="row d-flex flex-wrap align-items-center mb-2">
-                <div class="col-md-2 col-12 text-md-end">電話番号</div>
+                <div class="col-md-2 col-12 text-md-end">Số điện thoại</div>
                 <div class="row col-md-10 col-12 d-flex align-items-center">
                     <div class="col-md-6 col-12">
                         <input type="tel" class="form-control" placeholder="" name="phone"
@@ -125,7 +125,7 @@
             </div>
             {{-- email --}}
             <div class="row d-flex flex-wrap align-items-center mb-2">
-                <div class="col-md-2 col-12 text-md-end">メインアドレス</div>
+                <div class="col-md-2 col-12 text-md-end">Email</div>
                 <div class="row col-md-10 col-12 d-flex flex-wrap align-items-center">
                     <div class="col-md-6 col-12">
                         <input type="text" class="form-control" placeholder="TERASアドレス" name="email"
@@ -135,7 +135,7 @@
                         <label for="teras">
                             <input type="checkbox" class="me-1  cursor-pointer" id="teras" name="is_notification_main_email"
                                 value="1" @if ($user->profile->is_notification_main_email ?? '' == Config::get('const.profile.yes')) checked @endif>
-                            このメールで通知を受け取る
+                                Nhận thông báo qua email này
                         </label>
                     </div>
                 </div>
@@ -148,7 +148,7 @@
             </div>
             {{-- password --}}
             <div class="row d-flex flex-wrap align-items-center mb-2">
-                <div class="col-md-2 col-12 text-md-end">パスワード</div>
+                <div class="col-md-2 col-12 text-md-end">Mật khẩu</div>
                 <div class="row col-md-10 col-12 d-flex flex-wrap align-items-center">
                     <div class="col-md-6 col-12">
                         <input type="password" class="form-control" name="password" value="{{ old('password') }}">
@@ -163,7 +163,7 @@
             </div>
             {{-- avatar --}}
             <div class="row d-flex flex-wrap align-items-center mb-2">
-                <div class="col-md-2 col-12 text-md-end">アイコン</div>
+                <div class="col-md-2 col-12 text-md-end">Ảnh đại diện</div>
                 <div class="row col-md-10 col-12 d-flex flex-wrap align-items-center">
                     <div id="containerImage" class="@if ($user->profile->avatar) col-3 @endif">
                         @if ($user->profile->avatar)
@@ -172,7 +172,7 @@
                         @endif
                     </div>
                     <div class="col-md-3 col-4">
-                        <button type="button" class="btn-grey button-image">選　択</button>
+                        <button type="button" class="btn-grey button-image">Chọn</button>
                     </div>
                     <input type="file" accept="image/png, image/gif, image/jpeg" type="file" name="avatar"
                         id="inputImage" hidden>
@@ -188,21 +188,21 @@
         <div class="col-md-4 col-12">
             {{--  --}}
             <div class="d-flex flex-wrap align-items-center mb-3">
-                <label class="form-check-label me-2" for="on-off-switch" data-on="0" data-off="1">無効 / 有効 </label>
+                <label class="form-check-label me-2" for="on-off-switch" data-on="0" data-off="1">Có hiệu lực / Vô hiệu hóa </label>
                 <div class="form-check form-switch mt-1">
                     <input class="form-check-input  cursor-pointer" type="checkbox" id="on-off-switch" name="status" value="1"
                         @if ($user->status == \App\Classes\Enum\StaffStatusEnum::VALID->value) checked @endif>
                 </div>
-                <label class="form-check-label me-2 d-none" id="checkbox-on">有効</label>
-                <label class="form-check-label me-2 d-none" id="checkbox-off">無効</label>
+                <label class="form-check-label me-2 d-none" id="checkbox-on">Vô hiệu hóa</label>
+                <label class="form-check-label me-2 d-none" id="checkbox-off">Có hiệu lực</label>
             </div>
         </div>
         <div class="col-12 d-flex">
             <div class="col-md-6 col-4 text-end pe-4">
-                <a href="{{ route('staffs') }}" type="button" class="btn-dark-dark">戻　る</a>
+                <a href="{{ route('staffs') }}" type="button" class="btn-dark-dark">Trở lại</a>
             </div>
             <div class="col-md-6 col-4 ps-4">
-                <button type="submit" class="btn-dark-dark">保　存</button>
+                <button type="submit" class="btn-dark-dark">Gửi</button>
             </div>
         </div>
     </form>

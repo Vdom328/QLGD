@@ -6,6 +6,7 @@ use App\Classes\Enum\StaffStatusEnum;
 use App\Classes\Repository\Interfaces\IUserRepository;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
 class UserRepository extends BaseRepository implements IUserRepository
@@ -21,9 +22,9 @@ class UserRepository extends BaseRepository implements IUserRepository
     public function filterStaffs($data)
     {
         if ($data == 1) {
-            $query = $this->model->where('status', $data)->paginate(20);
+            $query = $this->model->where('status', $data)->paginate(Config::get('const.pagination'));
         } else {
-            $query = $this->model->paginate(20);
+            $query = $this->model->paginate(Config::get('const.pagination'));
         }
         return $query;
     }
@@ -39,7 +40,7 @@ class UserRepository extends BaseRepository implements IUserRepository
             ->leftJoin('profiles', 'users.id', '=', 'profiles.user_id')
             ->leftJoin('role_user', 'users.id', '=', 'role_user.user_id')
             ->orderBy($column, $direction)
-            ->paginate(20);
+            ->paginate(Config::get('const.pagination'));
     }
 
     public function getListStaffs($data)
@@ -59,7 +60,7 @@ class UserRepository extends BaseRepository implements IUserRepository
             $query = $query->where('status', StaffStatusEnum::VALID);
         }
 
-        $staffs = $query->paginate(20);
+        $staffs = $query->paginate(Config::get('const.pagination'));
 
         $attr = [
             'column' => $column,
