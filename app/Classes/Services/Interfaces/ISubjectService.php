@@ -2,22 +2,27 @@
 
 namespace App\Classes\Services\Interfaces;
 
-interface IClassRoomService
+interface ISubjectService
 {
     /**
-     * find data
-     * @param array $data
+     * radom subject no
      */
-    public function filter($data);
+    public function randomNo();
 
     /**
-     * create a new classroom
+     * create new instance
      * @param array $data
      */
     public function createNewData($data);
 
     /**
-     * find bu id
+     * filter data
+     * @param array $data
+     */
+    public function filter($data);
+
+    /**
+     * find data by id
      * @param int $id
      */
     public function findById($id);
@@ -27,6 +32,4 @@ interface IClassRoomService
      * @param array $data
      */
     public function saveUpdate($data);
-
-
 }

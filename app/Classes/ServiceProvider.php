@@ -30,5 +30,6 @@ class ServiceProvider extends LServiceProvider
         App::bind(IService\IProfileService::class, Service\ProfileService::class);
         App::bind(IService\IRoleService::class, Service\RoleService::class);
         App::bind(IService\IClassRoomService::class, Service\ClassRoomService::class);
+        App::bind(IService\ISubjectService::class, Service\SubjectService::class);
     }
 }

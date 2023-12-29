@@ -59,4 +59,42 @@ class ClassRoomService extends BaseService implements IClassRoomService
     {
         return $this->classRoomRepository->filter($data);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findById($id)
+    {
+        return $this->classRoomRepository->findById($id);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function saveUpdate($data)
+    {
+        DB::beginTransaction();
+        try {
+
+            if (!isset($data['status'])) {
+                $status = Config::get('const.status.no');
+            }else{
+                $status = $data['status'];
+            }
+            $attr = [
+                'name' =>$data['name'],
+                'status' =>$status,
+                'description'=>$data['description'],
+            ];
+
+            $this->classRoomRepository->updateById($data['id'],$attr);
+            DB::commit();
+
+            return true;
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error('Error while update class room: ' . $e->getMessage());
+            return false;
+        }
+    }
 }

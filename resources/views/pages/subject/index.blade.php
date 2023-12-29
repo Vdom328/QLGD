@@ -4,23 +4,23 @@
 @endsection
 
 @section('page_icon')
-    <img src="{{ asset('assets/images/icons/ios-paper.png') }}">
+    <img src="{{ asset('assets/images/icons/list_todo.jpg') }}">
 @endsection
 
 @section('page_title')
-    Cài đặt phòng học
+    Cài đặt môn học
 @endsection
 @section('title-page')
-    Cài đặt phòng học
+    Cài đặt môn học
 @endsection
 
 @section('page_title_actions')
     <div class="col-12 d-flex flex-wrap align-items-center">
         <div class="col-md-6 col-12 ">
-            <i class="fas fa-angle-right"></i> Cài đặt phòng học
+            <i class="fas fa-angle-right"></i> Cài đặt môn học
         </div>
         <div class="d-flex col-md-6 col-12  mt-md-0 mt-2  justify-content-end">
-            @include('components.btn-create-new', ['url' => route('classroom.create')])
+            @include('components.btn-create-new', ['url' => route('subject.create')])
         </div>
     </div>
 @endsection
@@ -36,13 +36,13 @@
                     <div class="col-lg-7 col-md-6 col-12">
                         <select class="form-select" name="status" id="status">
                             <option value=""></option>
-                            <option value="{{ Config::get('const.status.yes') }}">Mở</option>
-                            <option value="{{ Config::get('const.status.no') }}">Đóng</option>
+                            <option value="{{ Config::get('const.status.yes') }}">Có hiệu lực</option>
+                            <option value="{{ Config::get('const.status.no') }}">Vô hiệu hóa</option>
                         </select>
                     </div>
                 </div>
                 <div class="row col-lg-4 col-md-6 col-12 mt-lg-0 mt-2 d-flex flex-wrap align-items-center">
-                    <div class="col-lg-5 col-md-6 col-12 text-xl-end">Tên phòng: </div>
+                    <div class="col-lg-5 col-md-6 col-12 text-xl-end">Từ khóa: </div>
                     <div class="col-lg-7 col-md-6 col-12">
                         <input type="text" class="form-control" name="key">
                     </div>
@@ -55,7 +55,10 @@
         </div>
 
         <div class="mt-3">
-
+            <div class="col-12 d-flex justify-content-end mb-2">
+                <input type="checkbox" name="filter_me" id="filter_me" class="me-2 cursor-pointer form-check-input"><label
+                    for="filter_me" class="cursor-pointer">Chỉ hiển thị những môn học là tiết học đầu tiên</label>
+            </div>
             <div>
 
             </div>
@@ -63,17 +66,22 @@
                 <table class="table table-hover ">
                     <thead>
                         <tr>
-                            <th data-column="name" data-direction="desc" class="sort_table">Tên phòng
+                            <th data-column="name" data-direction="desc" class="sort_table">Tên môn học
+                                <i class="ms-1 fas fa-sort icon_sort"></i>
+                            </th>
+                            <th data-column="credits_no" data-direction="desc" class="sort_table">Mã môn học
                                 <i class="ms-1 fas fa-sort icon_sort"></i>
                             </th>
                             <th data-column="status" data-direction="desc" class="sort_table">Trạng thái
                                 <i class="ms-1 fas fa-sort icon_sort"></i>
                             </th>
-                            <th>Ghi chú</th>
+                            <th data-column="quantity_credits" data-direction="desc" class="sort_table">Số tín chỉ
+                                <i class="ms-1 fas fa-sort icon_sort"></i>
+                            </th>
                         </tr>
                     </thead>
-                    <tbody id="list_class_room">
-                        @include('pages.class-room.partials._list')
+                    <tbody id="list_subjects">
+                        @include('pages.subject.partials._list')
                     </tbody>
                 </table>
             </div>
@@ -120,9 +128,11 @@
 
             // call data
             function ajaxdata(url, column, direction) {
+                var isChecked = $("#filter_me").prop("checked");
                 $.ajax({
                     type: 'get',
                     data: {
+                        filter_me: isChecked,
                         column: column,
                         direction: direction,
                         status: $('select[name="status"]').val(),
@@ -131,7 +141,7 @@
                     url: url,
                     success: function(response) {
                         if (response.length != 0) {
-                            $('#list_class_room').html(response.resultContainer);
+                            $('#list_subjects').html(response.resultContainer);
                             $('#paginate').html(response.paginate);
                         }
                     },

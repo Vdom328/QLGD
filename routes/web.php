@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\ClassRoomController;
+use App\Http\Controllers\LabsController;
 use App\Http\Controllers\StaffsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -42,10 +44,28 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/sort-data', [StaffsController::class, 'sortStaffs'])->name('staffs.sort');
         });
 
+        // class rooms routes
         Route::group(['prefix' => 'class-room'], function () {
             Route::get('/', [ClassRoomController::class, 'index'])->name('classroom.index');
             Route::get('/create', [ClassRoomController::class, 'create'])->name('classroom.create');
             Route::post('/post-register', [ClassRoomController::class, 'postRegister'])->name('classroom.postRegister');
+            Route::get('/update/{id}', [ClassRoomController::class, 'update'])->name('classroom.update');
+            Route::post('/update', [ClassRoomController::class, 'saveUpdate'])->name('classroom.saveUpdate');
+        });
+
+        // subject routes
+        Route::group(['prefix' => 'subject'], function () {
+            Route::get('/', [SubjectController::class, 'index'])->name('subject.index');
+            Route::get('/create', [SubjectController::class, 'create'])->name('subject.create');
+            Route::get('/radomNo', [SubjectController::class, 'radomNo'])->name('subject.radomNo');
+            Route::post('/post-register', [SubjectController::class, 'saveCreate'])->name('subject.saveCreate');
+            Route::get('/update/{id}', [SubjectController::class, 'update'])->name('subject.update');
+            Route::post('/update', [SubjectController::class, 'saveUpdate'])->name('subject.saveUpdate');
+        });
+
+        // labs routes
+        Route::group(['prefix' => 'labs'], function () {
+            Route::get('/', [LabsController::class, 'index'])->name('labs.index');
         });
     });
 

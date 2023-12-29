@@ -26,6 +26,14 @@ class ClassRoomController extends Controller
     public function index(Request $request)
     {
         $data = $this->classRoomService->filter($request->all());
+        if (request()->ajax()) {
+            $resultContainer = view('pages.class-room.partials._list', compact('data'))->render();
+            $paginate = view('partials.paginate', ['list' => $data])->render();
+            return response()->json([
+                'resultContainer' => $resultContainer,
+                'paginate' => $paginate
+            ]);
+        }
         return view('pages.class-room.index', compact('data'));
     }
 
@@ -49,6 +57,29 @@ class ClassRoomController extends Controller
             return redirect()->back();
         }
         Session::flash('success', "Thêm phòng học mới thành công !");
+        return redirect()->route('classroom.index');
+    }
+
+    /**
+     * update class room
+     */
+    public function update($id)
+    {
+        $data = $this->classRoomService->findById($id);
+        return view('pages.class-room.edit', compact('data'));
+    }
+
+    /**
+     * save update classroom
+     */
+    public function saveUpdate(Request $request)
+    {
+        $update = $this->classRoomService->saveUpdate($request->all());
+        if ($update == false) {
+            Session::flash('error', "Sửa phòng học thất bạt !");
+            return redirect()->back();
+        }
+        Session::flash('success', "Sửa phòng học thành công !");
         return redirect()->route('classroom.index');
     }
 }

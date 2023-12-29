@@ -95,7 +95,7 @@ return [
     'password' => 'Mật khẩu không đúng.',
     'present' => ':attribute phải được cung cấp.',
     'regex' => 'Định dạng :attribute không hợp lệ.',
-    'required' => ':attribute là trường bắt buộc.',
+    'required' => 'Là trường bắt buộc.',
     'required_if' => ':attribute là trường bắt buộc khi :other là :value.',
     'required_unless' => ':attribute là trường bắt buộc trừ khi :other thuộc :values.',
     'required_with' => ':attribute là trường bắt buộc khi :values có mặt.',
