@@ -2,6 +2,7 @@
     <div class="scrollbar-sidebar">
         <div class="app-sidebar__inner">
             <ul class="vertical-nav-menu">
+                {{-- settings --}}
                 <li>
                     <a href="#" class="ps-0 text-sidebar"> Cài đặt </a>
                     <ul class="mm-collapse mm-show">
@@ -38,6 +39,7 @@
                         </li>
                     </ul>
                 </li>
+                {{-- requai --}}
                 <li>
                     <a href="#" class="ps-0 text-sidebar"> Chỉ định </a>
                     <ul class="mm-collapse mm-show">

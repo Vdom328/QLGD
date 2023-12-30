@@ -43,6 +43,6 @@ class SubjectRepository  extends BaseRepository implements ISubjectRepository
         if (isset($data['column']) && isset($data['direction'])) {
             $query = $query->orderBy($data['column'], $data['direction']);
         }
-        return $query->paginate(Config::get('const.pagination'));
+        return $query->with('subject_labs')->paginate(Config::get('const.pagination'));
     }
 }

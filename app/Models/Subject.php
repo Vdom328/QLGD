@@ -10,4 +10,9 @@ class Subject extends Model
     use HasFactory;
     protected $table = 'subjects';
     protected $guarded = [];
+
+    public function subject_labs()
+    {
+        return $this->belongsTo(SubjectLabs::class, 'id', 'subject_id');
+    }
 }

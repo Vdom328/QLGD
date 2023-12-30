@@ -5,6 +5,7 @@ use App\Http\Controllers\LabsController;
 use App\Http\Controllers\StaffsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TeacherSubjectController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -66,6 +67,12 @@ Route::group(['middleware' => ['auth']], function () {
         // labs routes
         Route::group(['prefix' => 'labs'], function () {
             Route::get('/', [LabsController::class, 'index'])->name('labs.index');
+            Route::post('/create', [LabsController::class, 'create'])->name('labs.create');
+        });
+
+        // teachers subject routes
+        Route::group(['prefix' => 'teacher-subject'], function () {
+            Route::get('/', [TeacherSubjectController::class, 'index'])->name('teacherSubject.index');
         });
     });
 
