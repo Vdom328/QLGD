@@ -16,13 +16,14 @@ class Button extends Component
     public $attrs;
     public $dataTitle;
     public $dataMessage;
+    public $dataAction;
     public $value;
 
 
     /**
      * Create a new component instance.
      */
-    public function __construct(string $id="", string $type="submit", string $class = "", string $text = "", string $name = "", string $attrs="", string $dataTitle="", string $dataMessage="", string $value="")
+    public function __construct(string $id="", string $type="submit", string $class = "", string $text = "", string $name = "", string $attrs="", string $dataTitle="", $dataAction, string $dataMessage="", string $value="")
     {
         $this->id = $id;
         $this->type = $type;
@@ -32,6 +33,7 @@ class Button extends Component
         $this->attrs = $attrs;
         $this->dataTitle = $dataTitle;
         $this->dataMessage = $dataMessage;
+        $this->dataAction = $dataAction;
         $this->value = $value;
     }
 
@@ -50,7 +52,8 @@ class Button extends Component
         $attrs = $this->attrs;
         $dataTitle = $this->dataTitle;
         $dataMessage = $this->dataMessage;
+        $dataAction = $this->dataAction;
         $value = $this->value;
-        return view('components.forms.button', compact('id', 'type', 'name', 'class', 'text', 'attrs', 'dataTitle', 'dataMessage', 'value'));
+        return view('components.forms.button', compact('id', 'type', 'name', 'class', 'text', 'attrs', 'dataTitle', 'dataMessage','dataAction', 'value'));
     }
 }

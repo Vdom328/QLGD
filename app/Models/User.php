@@ -131,5 +131,8 @@ class User extends Authenticatable
         return $this->hasOne(\App\Models\RoleUser::class);
     }
 
-
+    public function teacher_subject()
+    {
+        return $this->hasMany(TeacherSubject::class, 'teacher_id');
+    }
 }

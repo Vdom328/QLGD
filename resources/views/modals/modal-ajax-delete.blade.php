@@ -14,8 +14,8 @@
           <p>Delete this user?</p>
         </div>
         <div class="modal-footer">
-          {!! Form::button('<i class="fa fa-fw fa-close" aria-hidden="true"></i> いいえ', array('class' => 'btn btn-outline pull-left btn-light', 'type' => 'button', 'data-bs-dismiss' => 'modal' )) !!}
-          {!! Form::button('<i class="fa fa-fw fa-trash" aria-hidden="true"></i> はい', array('class' => 'btn btn-danger pull-right', 'type' => 'button', 'id' => 'confirm' )) !!}
+          {!! Form::button('<i class="fa fa-fw fa-close" aria-hidden="true"></i> Sai', array('class' => 'btn btn-outline pull-left btn-light', 'type' => 'button', 'data-bs-dismiss' => 'modal' )) !!}
+          {!! Form::button('<i class="fa fa-fw fa-trash" aria-hidden="true"></i> Đúng', array('class' => 'btn btn-danger pull-right', 'type' => 'button', 'id' => 'confirm' )) !!}
         </div>
       </div>
     </div>

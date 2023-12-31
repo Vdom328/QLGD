@@ -17,12 +17,12 @@
                 <p>Delete this user?</p>
             </div>
             <div class="modal-footer">
-                {!! Form::button('<i class="fa fa-fw fa-close" aria-hidden="true"></i> いいえ', [
+                {!! Form::button('<i class="fa fa-fw fa-close" aria-hidden="true"></i> Sai', [
                     'class' => 'btn btn-outline pull-left btn-light',
                     'type' => 'button',
                     'data-bs-dismiss' => 'modal',
                 ]) !!}
-                {!! Form::button('<i class="fa fa-fw fa-trash" aria-hidden="true"></i> はい', [
+                {!! Form::button('<i class="fa fa-fw fa-trash" aria-hidden="true"></i> Đúng', [
                     'class' => 'btn btn-danger pull-right',
                     'type' => 'button',
                     'id' => 'confirm',

@@ -29,4 +29,9 @@ interface IClassRoomService
     public function saveUpdate($data);
 
 
+    /**
+     * delete by id
+     * @param int $id
+     */
+    public function deleteById($id);
 }

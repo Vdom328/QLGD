@@ -86,4 +86,18 @@ class SubjectController extends Controller
         Session::flash('success', "Sửa môn học thành công !");
         return redirect()->route('subject.index');
     }
+
+    /**
+     * delete subject object
+     */
+    public function delete($id)
+    {
+        $delete = $this->subjectService->deleteById($id);
+        if ($delete == false) {
+            Session::flash('error', "Xóa môn học thất bạt !");
+            return redirect()->back();
+        }
+        Session::flash('success', "Xóa môn học thành công !");
+        return response()->json([]);
+    }
 }

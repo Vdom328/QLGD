@@ -46,21 +46,46 @@
                         <li>
                             <a href="{{ route('labs.index') }}"
                                 class="{{ strpos(Route::currentRouteName(), 'labs.index') === 0 ? 'mm-active' : '' }}">
-                                <img src="{{ asset('assets/images/icons/administrator-solid.png') }}"
+                                <img src="{{ asset('assets/images/icons/invoice.png') }}"
                                     class="menu_icon icon-bxs-dashboard" />
                                 Môn học chỉ định
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('labs.index') }}"
-                                class="{{ strpos(Route::currentRouteName(), 'labs.index') === 0 ? 'mm-active' : '' }}">
-                                <img src="{{ asset('assets/images/icons/administrator-solid.png') }}"
+                            <a href="{{ route('teacherSubject.index') }}"
+                                class="{{ strpos(Route::currentRouteName(), 'teacherSubject.index') === 0 ? 'mm-active' : '' }}
+                                {{ strpos(Route::currentRouteName(), 'teacherSubject.update') === 0 ? 'mm-active' : '' }}">
+                                <img src="{{ asset('assets/images/icons/truck.png') }}"
                                     class="menu_icon icon-bxs-dashboard" />
                                 Giảng viên chỉ định
                             </a>
                         </li>
                     </ul>
                 </li>
+                {{-- view --}}
+                {{-- <li>
+                    <a href="#" class="ps-0 text-sidebar"> Thời khóa biểu</a>
+                    <ul class="mm-collapse mm-show">
+
+                        <li>
+                            <a href="{{ route('teacherSubject.index') }}"
+                                class="{{ strpos(Route::currentRouteName(), 'teacherSubject.index') === 0 ? 'mm-active' : '' }}">
+                                <img src="{{ asset('assets/images/icons/administrator-solid.png') }}"
+                                    class="menu_icon icon-bxs-dashboard" />
+                                Thời khóa biểu
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('labs.index') }}"
+                                class="{{ strpos(Route::currentRouteName(), 'labs.index') === 0 ? 'mm-active' : '' }}">
+                                <img src="{{ asset('assets/images/icons/administrator-solid.png') }}"
+                                    class="menu_icon icon-bxs-dashboard" />
+                                Thời khóa biểu giảng viên
+                            </a>
+                        </li>
+                    </ul>
+                </li> --}}
             </ul>
         </div>
     </div>

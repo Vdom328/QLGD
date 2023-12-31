@@ -52,6 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/post-register', [ClassRoomController::class, 'postRegister'])->name('classroom.postRegister');
             Route::get('/update/{id}', [ClassRoomController::class, 'update'])->name('classroom.update');
             Route::post('/update', [ClassRoomController::class, 'saveUpdate'])->name('classroom.saveUpdate');
+            Route::delete('/delete/{id}', [ClassRoomController::class, 'delete'])->name('classroom.delete');
         });
 
         // subject routes
@@ -62,6 +63,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/post-register', [SubjectController::class, 'saveCreate'])->name('subject.saveCreate');
             Route::get('/update/{id}', [SubjectController::class, 'update'])->name('subject.update');
             Route::post('/update', [SubjectController::class, 'saveUpdate'])->name('subject.saveUpdate');
+            Route::delete('/delete/{id}', [SubjectController::class, 'delete'])->name('subject.delete');
         });
 
         // labs routes
@@ -73,6 +75,8 @@ Route::group(['middleware' => ['auth']], function () {
         // teachers subject routes
         Route::group(['prefix' => 'teacher-subject'], function () {
             Route::get('/', [TeacherSubjectController::class, 'index'])->name('teacherSubject.index');
+            Route::get('/update/{id}', [TeacherSubjectController::class, 'update'])->name('teacherSubject.update');
+            Route::post('/create', [TeacherSubjectController::class, 'create'])->name('teacherSubject.create');
         });
     });
 

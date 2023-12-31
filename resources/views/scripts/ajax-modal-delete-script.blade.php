@@ -15,9 +15,10 @@
                 url : url,
                 method: 'DELETE',
             }).done(function (result) {
+                window.location.reload();
                 $('#ajaxDelete').modal('hide');
             }).fail(function () {
-                alert('エラーが発生しました。');
+                alert('Một lỗi đã xảy ra.');
                 $('#ajaxDelete').modal('hide');
             });
         });

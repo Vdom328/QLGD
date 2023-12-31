@@ -42,4 +42,11 @@ interface IUserService
     public function getListUser();
 
     public function getUserByEmail($email);
+
+    /**
+     * filter users
+     * @param array $data
+     */
+    public function filter($data);
+
 }

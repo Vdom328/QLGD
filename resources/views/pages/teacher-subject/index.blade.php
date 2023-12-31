@@ -1,56 +1,24 @@
 @extends('layouts.app')
 
 @section('template_linked_css')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <style>
-        .select2-container--default .select2-selection--single {
-            border: none !important;;
-        }
-        .select2-container--default .select2-selection--single .select2-selection__arrow {
-            height: 40px;
-        }
-        .selection {
-            display: block;
-            width: 100%;
-            padding: 0.375rem 2.25rem 0.375rem 0.75rem;
-            -moz-padding-start: calc(.75rem - 3px);
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.5;
-            color: #495057;
-            background-color: #fff;
-            background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e);
-            background-repeat: no-repeat;
-            background-position: right 0.75rem center;
-            background-size: 16px 12px;
-            border: 1px solid #ced4da;
-            border-radius: 0.25rem;
-            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-        .select2-container {
-            width: 90% !important;
-            }
-    </style>
+
 @endsection
 
 @section('page_icon')
-    <img src="{{ asset('assets/images/icons/list_todo.jpg') }}">
+    <img src="{{ asset('assets/images/icons/truck.png') }}">
 @endsection
 
 @section('page_title')
-    Môn học chỉ định
+    Giảng viên chỉ định
 @endsection
 @section('title-page')
-    Môn học chỉ định
+    Giảng viên chỉ định
 @endsection
 
 @section('page_title_actions')
     <div class="col-12 d-flex flex-wrap align-items-center">
         <div class="col-md-6 col-12 ">
-            <i class="fas fa-angle-right"></i> Môn học chỉ định
+            <i class="fas fa-angle-right"></i> Giảng viên chỉ định
         </div>
     </div>
 @endsection
@@ -60,10 +28,8 @@
         <div class="row d-flex pt-3 pb-3 flex-wrap bg-white rounded shadow-sm">
             <div class="col-12 border_bottom_search pb-2 fw-bold">Chú thích:</div>
             <div class="col-12 pb-2">
-                <textarea rows="5" class="form-control" disabled>Là những môn học có phòng học cần chỉ định.
-Ví dụ: Môn tin đại cương cần phong labs dùng có máy tính,
-          Môn hóa cần phong labs dùng có dụng cụ thí nghiệm,...
-
+                <textarea rows="5" class="form-control" disabled>Là những những giảng viên được chỉ định dậy môn nào.
+Ví dụ: Giảng viên A được chỉ định dậy những môn như môn1, môn2 ,...
                 </textarea>
             </div>
             <div class="col-12 border_bottom_search pb-2 fw-bold">Tìm kiếm theo:</div>
@@ -74,8 +40,8 @@ Ví dụ: Môn tin đại cương cần phong labs dùng có máy tính,
                     <div class="col-lg-7 col-md-6 col-12">
                         <select class="form-select" name="status" id="status">
                             <option value=""></option>
-                            <option value="{{ Config::get('const.status.yes') }}">Có hiệu lực</option>
-                            <option value="{{ Config::get('const.status.no') }}">Vô hiệu hóa</option>
+                            <option value="{{ Config::get('const.status.no') }}">Có hiệu lực</option>
+                            <option value="{{ Config::get('const.status.yes') }}">Vô hiệu hóa</option>
                         </select>
                     </div>
                 </div>
@@ -94,10 +60,6 @@ Ví dụ: Môn tin đại cương cần phong labs dùng có máy tính,
         </div>
 
         <div class="mt-3">
-            {{-- <div class="col-12 d-flex justify-content-end mb-2">
-                <input type="checkbox" name="filter_me" id="filter_me" class="me-2 cursor-pointer form-check-input"><label
-                    for="filter_me" class="cursor-pointer">Chỉ hiển thị những môn học chưa có phòng labs</label>
-            </div> --}}
             <div>
 
             </div>
@@ -105,21 +67,22 @@ Ví dụ: Môn tin đại cương cần phong labs dùng có máy tính,
                 <table class="table table-hover ">
                     <thead>
                         <tr>
-                            <th data-column="name" data-direction="desc" class="sort_table">Tên môn học
+                            <th  data-column="staff_no" data-direction="desc" class="sort_table">Số Nhân Viên
                                 <i class="ms-1 fas fa-sort icon_sort"></i>
                             </th>
-                            <th data-column="credits_no" data-direction="desc" class="sort_table">Mã môn học
+                            <th></th>
+                            <th data-column="name" data-direction="desc" class="sort_table">Tên giảng viên
                                 <i class="ms-1 fas fa-sort icon_sort"></i>
                             </th>
-                            <th data-column="status" data-direction="desc" class="sort_table">Trạng thái
+                            <th data-column="email" data-direction="desc" class="sort_table">Email
                                 <i class="ms-1 fas fa-sort icon_sort"></i>
                             </th>
-                            <th>Phòng học</th>
-                            <th>Ghi chú</th>
+                            <th>Môn học</th>
+                            <th></th>
                         </tr>
                     </thead>
-                    <tbody id="list_subjects">
-                        @include('pages.labs.partials._list')
+                    <tbody id="list_data">
+                        @include('pages.teacher-subject.partials._list')
                     </tbody>
                 </table>
             </div>
@@ -131,10 +94,8 @@ Ví dụ: Môn tin đại cương cần phong labs dùng có máy tính,
 @endsection
 
 @section('footer_scripts')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('.select-room').select2();
             /**
              * click fillter and sort data
              */
@@ -168,11 +129,9 @@ Ví dụ: Môn tin đại cương cần phong labs dùng có máy tính,
 
             // call data
             function ajaxdata(url, column, direction) {
-                var isChecked = $("#filter_me").prop("checked");
                 $.ajax({
                     type: 'get',
                     data: {
-                        filter_me: isChecked,
                         column: column,
                         direction: direction,
                         status: $('select[name="status"]').val(),
@@ -181,9 +140,8 @@ Ví dụ: Môn tin đại cương cần phong labs dùng có máy tính,
                     url: url,
                     success: function(response) {
                         if (response.length != 0) {
-                            $('#list_subjects').html(response.resultContainer);
+                            $('#list_data').html(response.resultContainer);
                             $('#paginate').html(response.paginate);
-                            $('.select-room').select2();
                         }
                     },
                 });

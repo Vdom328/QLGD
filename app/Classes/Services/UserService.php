@@ -59,8 +59,19 @@ class UserService extends BaseService implements IUserService
         return $this->userRepository->find();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getUserByEmail($email)
     {
         return $this->userRepository->findOne(['email' => $email]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function filter($data)
+    {
+        return $this->userRepository->filter($data);
     }
 }

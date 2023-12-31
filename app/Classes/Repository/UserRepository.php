@@ -2,6 +2,7 @@
 
 namespace App\Classes\Repository;
 
+use App\Classes\Enum\RoleUserEnum;
 use App\Classes\Enum\StaffStatusEnum;
 use App\Classes\Repository\Interfaces\IUserRepository;
 use App\Models\User;
@@ -68,5 +69,46 @@ class UserRepository extends BaseRepository implements IUserRepository
             'staffs' => $staffs,
         ];
         return $attr;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function filter($data)
+    {
+        // Start a base query
+        $query = $this->model->with(['profile', 'roles','teacher_subject']);
+
+        // Filter by teacher role if the flag is set to true
+        if (isset($data['teacher']) && $data['teacher'] === 'true') {
+            $query->whereHas('roles', function ($subQuery) {
+                $subQuery->where('roles.id', RoleUserEnum::STAFF->value);
+            });
+        }
+
+        // Filter by status if provided
+        if (isset($data['status'])) {
+            $query->where('users.status', $data['status']);
+        }
+
+        // Filter by name using search key if provided
+        if (isset($data['key'])) {
+            $query->whereHas('profile', function ($subQuery) use ($data) {
+                $subQuery->where(DB::raw("CONCAT(first_name, ' ', last_name)"), 'LIKE', "%{$data['key']}%");
+            });
+        }
+
+        // Apply ordering if column and direction are provided
+        if (isset($data['column']) && isset($data['direction'])) {
+            $query = $query
+                ->select('users.*', 'profiles.staff_no', DB::raw('CONCAT(profiles.first_name, " ", profiles.last_name) AS name'))
+                ->leftJoin('profiles', 'users.id', '=', 'profiles.user_id')
+                ->leftJoin('role_user', 'users.id', '=', 'role_user.user_id')
+                ->leftJoin('roles', 'role_user.role_id', '=', 'roles.id')
+                ->orderBy($data['column'], $data['direction']);
+        }
+
+        // Paginate the results
+        return $query->paginate(Config::get('const.pagination'));
     }
 }

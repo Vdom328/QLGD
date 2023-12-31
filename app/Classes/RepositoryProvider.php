@@ -34,5 +34,6 @@ class RepositoryProvider extends ServiceProvider
         App::bind(IRepository\IClassRoomRepository::class, Repository\ClassRoomRepository::class);
         App::bind(IRepository\ISubjectRepository::class, Repository\SubjectRepository::class);
         App::bind(IRepository\ISubjectLabsRepository::class, Repository\SubjectLabsRepository::class);
+        App::bind(IRepository\ITeacherSubjectRepository::class, Repository\TeacherSubjectRepository::class);
     }
 }

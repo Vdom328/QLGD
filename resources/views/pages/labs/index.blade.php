@@ -37,7 +37,7 @@
 @endsection
 
 @section('page_icon')
-    <img src="{{ asset('assets/images/icons/list_todo.jpg') }}">
+    <img src="{{ asset('assets/images/icons/invoice.png') }}">
 @endsection
 
 @section('page_title')

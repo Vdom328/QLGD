@@ -82,4 +82,18 @@ class ClassRoomController extends Controller
         Session::flash('success', "Sửa phòng học thành công !");
         return redirect()->route('classroom.index');
     }
+
+    /**
+     * delete subject object
+     */
+    public function delete($id)
+    {
+        $delete = $this->classRoomService->deleteById($id);
+        if ($delete == false) {
+            Session::flash('error', "Xóa phòng học thất bạt !");
+            return redirect()->back();
+        }
+        Session::flash('success', "Xóa phòng học thành công !");
+        return response()->json([]);
+    }
 }

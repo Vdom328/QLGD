@@ -97,4 +97,22 @@ class ClassRoomService extends BaseService implements IClassRoomService
             return false;
         }
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function deleteById($id)
+    {
+        DB::beginTransaction();
+        try {
+            $this->classRoomRepository->deleteById($id);
+            DB::commit();
+
+            return true;
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error('Error while delete class room: ' . $e->getMessage());
+            return false;
+        }
+    }
 }

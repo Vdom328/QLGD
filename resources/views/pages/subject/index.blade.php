@@ -78,6 +78,7 @@
                             <th data-column="quantity_credits" data-direction="desc" class="sort_table">Số tín chỉ
                                 <i class="ms-1 fas fa-sort icon_sort"></i>
                             </th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="list_subjects">
@@ -93,6 +94,8 @@
 @endsection
 
 @section('footer_scripts')
+@include('modals.modal-ajax-delete')
+@include('scripts.ajax-modal-delete-script')
     <script>
         $(document).ready(function() {
             /**

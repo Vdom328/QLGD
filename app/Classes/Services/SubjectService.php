@@ -142,4 +142,22 @@ class SubjectService implements ISubjectService
             return false;
         }
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function deleteById($id)
+    {
+        DB::beginTransaction();
+        try {
+            $this->subjectRepository->deleteById($id);
+            DB::commit();
+
+            return true;
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error('Error while delete subject: ' . $e->getMessage());
+            return false;
+        }
+    }
 }

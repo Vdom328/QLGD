@@ -70,6 +70,7 @@
                                 <i class="ms-1 fas fa-sort icon_sort"></i>
                             </th>
                             <th>Ghi chú</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="list_class_room">
@@ -85,6 +86,8 @@
 @endsection
 
 @section('footer_scripts')
+@include('modals.modal-ajax-delete')
+@include('scripts.ajax-modal-delete-script')
     <script>
         $(document).ready(function() {
             /**

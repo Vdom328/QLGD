@@ -24,4 +24,9 @@ interface IUserRepository extends IBaseRepository
     public function sortStaffs($column, $direction);
 
     public function getListStaffs($data);
+
+    /**
+     * filter user
+     */
+    public function filter($data);
 }
