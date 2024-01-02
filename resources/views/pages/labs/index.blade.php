@@ -98,9 +98,7 @@ Ví dụ: Môn tin đại cương cần phong labs dùng có máy tính,
                 <input type="checkbox" name="filter_me" id="filter_me" class="me-2 cursor-pointer form-check-input"><label
                     for="filter_me" class="cursor-pointer">Chỉ hiển thị những môn học chưa có phòng labs</label>
             </div> --}}
-            <div>
 
-            </div>
             <div class="row p-3 bg-white rounded-3 customer_table_container shadow-sm">
                 <table class="table table-hover ">
                     <thead>

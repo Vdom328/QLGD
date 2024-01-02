@@ -4,6 +4,8 @@ use App\Http\Controllers\ClassRoomController;
 use App\Http\Controllers\LabsController;
 use App\Http\Controllers\StaffsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SchedulerController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherSubjectController;
 use Illuminate\Support\Facades\Auth;
@@ -77,6 +79,19 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/', [TeacherSubjectController::class, 'index'])->name('teacherSubject.index');
             Route::get('/update/{id}', [TeacherSubjectController::class, 'update'])->name('teacherSubject.update');
             Route::post('/create', [TeacherSubjectController::class, 'create'])->name('teacherSubject.create');
+            Route::post('/create-subject', [TeacherSubjectController::class, 'createSubject'])->name('teacherSubject.createSubject');
+            Route::delete('/delete/{id}', [TeacherSubjectController::class, 'delete'])->name('teacherSubject.delete');
+        });
+
+        // scheduler routes
+        Route::group(['prefix' => 'scheduler'], function () {
+            Route::get('/', [SchedulerController::class, 'index'])->name('scheduler.index');
+        });
+
+        // settings
+        Route::group(['prefix' => 'settings'], function () {
+            Route::get('/', [SettingController::class, 'index'])->name('settings.index');
+            Route::post('/update', [SettingController::class, 'update'])->name('settings.update');
         });
     });
 

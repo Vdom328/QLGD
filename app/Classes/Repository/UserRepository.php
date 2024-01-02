@@ -107,7 +107,9 @@ class UserRepository extends BaseRepository implements IUserRepository
                 ->leftJoin('roles', 'role_user.role_id', '=', 'roles.id')
                 ->orderBy($data['column'], $data['direction']);
         }
-
+        if (isset($data['paginate']) && $data['paginate'] == 'false') {
+            return $query->get();
+        }
         // Paginate the results
         return $query->paginate(Config::get('const.pagination'));
     }

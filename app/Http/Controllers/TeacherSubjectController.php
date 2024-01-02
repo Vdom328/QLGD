@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Classes\Services\Interfaces\ISubjectService;
 use App\Classes\Services\Interfaces\ITeacherSubjectService;
 use App\Classes\Services\Interfaces\IUserService;
+use App\Models\Subject;
+use App\Models\TeacherSubject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class TeacherSubjectController extends Controller
 {
-    protected $userService,$subjectService,$teacherSubjectService;
+    protected $userService, $subjectService, $teacherSubjectService;
 
     public function __construct(
         IUserService $userService,
@@ -45,8 +47,8 @@ class TeacherSubjectController extends Controller
     {
         $teacher = $this->userService->finById($id);
         $subject = $this->subjectService->filter(['paginate' => 'false']);
-        $teacher_subject = $this->teacherSubjectService->finByTeacherId($id);
-        return view('pages.teacher-subject.edit',compact('teacher','subject','teacher_subject'));
+        $data = $this->teacherSubjectService->finByTeacherId($id);
+        return view('pages.teacher-subject.edit', compact('teacher', 'subject', 'data'));
     }
 
     /**
@@ -56,10 +58,33 @@ class TeacherSubjectController extends Controller
     {
         $create = $this->teacherSubjectService->createNewData($request->all());
         if ($create == false) {
-            Session::flash('error', "Chỉnh sửa thất bạt !");
-            return redirect()->back();
+            return response()->json([ ]);
         }
-        Session::flash('success', "Chỉnh sửa thành công !");
-        return redirect()->route('teacherSubject.index');
+        return response()->json([ ]);
+    }
+
+    /**
+     * create subject createSubject
+     */
+    public function createSubject(Request $request)
+    {
+        $create = $this->teacherSubjectService->createNew($request->all());
+        $data = $this->teacherSubjectService->finByTeacherId($request->teacher_id);
+        $resultContainer = view('pages.teacher-subject.partials._list-subject', compact('data'))->render();
+        return response()->json([
+            'resultContainer' => $resultContainer,
+        ]);
+    }
+
+    /**
+     * delete a subject
+     */
+    public function delete($id)
+    {
+        $delete = $this->teacherSubjectService->delete($id);
+        if ($delete == false) {
+            return response()->json([ ]);
+        }
+        return response()->json([ ]);
     }
 }

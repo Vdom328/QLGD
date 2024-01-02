@@ -69,9 +69,9 @@ class SubjectService implements ISubjectService
                 'name' =>$data['name'],
                 'status' =>$status,
                 'credits_no' =>$data['credits_no'],
-                'avoid_last_lesson'=>$data['avoid_last_lesson'],
+                'avoid_first_lesson'=>$data['avoid_first_lesson'],
                 'block'=>$data['block'],
-                'require_spacing'=>$data['require_spacing'],
+                // 'require_spacing'=>$data['require_spacing'],
                 'require_class_room' =>$data['require_class_room'],
                 'quantity_credits' =>$data['quantity_credits'],
             ];
@@ -125,9 +125,9 @@ class SubjectService implements ISubjectService
                 'name' =>$data['name'],
                 'status' =>$status,
                 'credits_no' =>$data['credits_no'],
-                'avoid_last_lesson'=>$data['avoid_last_lesson'],
+                'avoid_first_lesson'=>$data['avoid_first_lesson'],
                 'block'=>$data['block'],
-                'require_spacing'=>$data['require_spacing'],
+                // 'require_spacing'=>$data['require_spacing'],
                 'require_class_room' =>$data['require_class_room'],
                 'quantity_credits' =>$data['quantity_credits'],
             ];

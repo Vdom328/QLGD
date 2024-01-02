@@ -26,7 +26,7 @@ class SubjectRepository  extends BaseRepository implements ISubjectRepository
         $query = $this->model;
 
         if (isset($data['filter_me']) && $data['filter_me'] == 'true') {
-            $query = $query->where('avoid_last_lesson', Config::get('const.status.yes'));
+            $query = $query->where('avoid_first_lesson', Config::get('const.status.yes'));
         }
 
         if (isset($data['labs']) && $data['labs'] == 'true') {

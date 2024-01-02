@@ -37,6 +37,14 @@
                                 Môn học
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('settings.index') }}"
+                                class="{{ strpos(Route::currentRouteName(), 'settings.index') === 0 ? 'mm-active' : '' }}">
+                                <img src="{{ asset('assets/images/icons/menu.jpg') }}"
+                                    class="menu_icon icon-bxs-dashboard" />
+                                Cài đặt chung
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 {{-- requai --}}
@@ -63,29 +71,19 @@
                     </ul>
                 </li>
                 {{-- view --}}
-                {{-- <li>
+                <li>
                     <a href="#" class="ps-0 text-sidebar"> Thời khóa biểu</a>
                     <ul class="mm-collapse mm-show">
-
                         <li>
-                            <a href="{{ route('teacherSubject.index') }}"
-                                class="{{ strpos(Route::currentRouteName(), 'teacherSubject.index') === 0 ? 'mm-active' : '' }}">
-                                <img src="{{ asset('assets/images/icons/administrator-solid.png') }}"
+                            <a href="{{ route('scheduler.index') }}"
+                                class="{{ strpos(Route::currentRouteName(), 'scheduler.index') === 0 ? 'mm-active' : '' }}">
+                                <img src="{{ asset('assets/images/icons/notes.png') }}"
                                     class="menu_icon icon-bxs-dashboard" />
                                 Thời khóa biểu
                             </a>
                         </li>
-
-                        <li>
-                            <a href="{{ route('labs.index') }}"
-                                class="{{ strpos(Route::currentRouteName(), 'labs.index') === 0 ? 'mm-active' : '' }}">
-                                <img src="{{ asset('assets/images/icons/administrator-solid.png') }}"
-                                    class="menu_icon icon-bxs-dashboard" />
-                                Thời khóa biểu giảng viên
-                            </a>
-                        </li>
                     </ul>
-                </li> --}}
+                </li>
             </ul>
         </div>
     </div>

@@ -17,7 +17,7 @@
         <td>{!! $teacher->email !!}</td>
         <td>
             @foreach ($teacher->teacher_subject as $teacher_subject)
-                <li>{{ $teacher_subject->subject->name }}</li>
+                <li>{{ $teacher_subject->subject->name }} - Lớp: {{ $teacher_subject->class }} </li>
             @endforeach
         </td>
         <td class="text-end">

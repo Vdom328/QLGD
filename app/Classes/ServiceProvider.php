@@ -33,5 +33,6 @@ class ServiceProvider extends LServiceProvider
         App::bind(IService\ISubjectService::class, Service\SubjectService::class);
         App::bind(IService\ILabsService::class, Service\LabsService::class);
         App::bind(IService\ITeacherSubjectService::class, Service\TeacherSubjectService::class);
+        App::bind(IService\ISchedulerService::class, Service\SchedulerService::class);
     }
 }

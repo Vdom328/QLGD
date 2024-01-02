@@ -76,12 +76,12 @@
                 <label for="">Là tiết học đầu tiên</label>
                 <div class="d-flex align-items-center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" @if ($data->avoid_last_lesson == Config::get('const.status.yes')) checked @endif type="radio" name="avoid_last_lesson" id="avoid_last_lesson1" value="{{ Config::get('const.status.yes') }}">
-                        <label class="form-check-label" for="avoid_last_lesson1">Đúng</label>
+                        <input class="form-check-input" @if ($data->avoid_first_lesson == Config::get('const.status.yes')) checked @endif type="radio" name="avoid_first_lesson" id="avoid_first_lesson1" value="{{ Config::get('const.status.yes') }}">
+                        <label class="form-check-label" for="avoid_first_lesson1">Đúng</label>
                       </div>
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" @if ($data->avoid_last_lesson == Config::get('const.status.no')) checked @endif type="radio" name="avoid_last_lesson" id="avoid_last_lesson2" value="{{ Config::get('const.status.no') }}">
-                        <label class="form-check-label" for="avoid_last_lesson2">Sai</label>
+                        <input class="form-check-input" @if ($data->avoid_first_lesson == Config::get('const.status.no')) checked @endif type="radio" name="avoid_first_lesson" id="avoid_first_lesson2" value="{{ Config::get('const.status.no') }}">
+                        <label class="form-check-label" for="avoid_first_lesson2">Sai</label>
                       </div>
                 </div>
             </div>
@@ -104,7 +104,7 @@
             </div>
             <div class="col-md-6 col-12">
                 {{-- status --}}
-                <label for="">Tránh việc 2 ngày liên tiếp cùng học</label>
+                {{-- <label for="">Tránh việc 2 ngày liên tiếp cùng học</label>
                 <div class="d-flex align-items-center">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" @if ($data->require_spacing == Config::get('const.status.yes')) checked @endif type="radio" name="require_spacing" id="require_spacing1" value="{{ Config::get('const.status.yes') }}">
@@ -114,7 +114,7 @@
                         <input class="form-check-input" @if ($data->require_spacing == Config::get('const.status.no')) checked @endif type="radio" name="require_spacing" id="require_spacing2" value="{{ Config::get('const.status.no') }}">
                         <label class="form-check-label" for="require_spacing2">Sai</label>
                       </div>
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="col-md-12 col-12 d-flex flex-wrap">

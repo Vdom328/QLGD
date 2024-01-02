@@ -15,4 +15,16 @@ interface ITeacherSubjectService
      * find data by teacher_id
      */
     public function finByTeacherId($teacher_id);
+
+     /**
+     * create a new data
+     * @param array $data
+     */
+    public function createNew($data);
+
+    /**
+     * delete by id
+     * @param int $id
+     */
+    public function delete($id);
 }
