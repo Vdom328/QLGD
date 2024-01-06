@@ -35,5 +35,9 @@ class RepositoryProvider extends ServiceProvider
         App::bind(IRepository\ISubjectRepository::class, Repository\SubjectRepository::class);
         App::bind(IRepository\ISubjectLabsRepository::class, Repository\SubjectLabsRepository::class);
         App::bind(IRepository\ITeacherSubjectRepository::class, Repository\TeacherSubjectRepository::class);
+        App::bind(IRepository\IScheduleRepository::class, Repository\ScheduleRepository::class);
+        App::bind(IRepository\IScheduleTableRepository::class, Repository\ScheduleTableRepository::class);
+        App::bind(IRepository\IScheduleErrorRepository::class, Repository\ScheduleErrorRepository::class);
+        App::bind(IRepository\ITeacherTimeSlotsRepository::class, Repository\TeacherTimeSlotsRepository::class);
     }
 }

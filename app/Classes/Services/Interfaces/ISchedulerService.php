@@ -9,5 +9,15 @@ interface ISchedulerService
     /**
      * get data schedule
      */
-    public function getData();
+    public function getData($data);
+
+    /**
+     * get data schedule
+     */
+    public function getSchedule($data);
+
+    /**
+     * get list schedule
+     */
+    public function getListSchedule();
 }

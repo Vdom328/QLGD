@@ -3,6 +3,7 @@
 namespace App\Classes\Services;
 
 use App\Classes\Repository\Interfaces\ITeacherSubjectRepository;
+use App\Classes\Repository\Interfaces\ITeacherTimeSlotsRepository;
 use App\Classes\Repository\Interfaces\IUserRepository;
 use App\Classes\Services\Interfaces\ITeacherSubjectService;
 use App\Models\Subject;
@@ -15,11 +16,15 @@ use Illuminate\Support\Facades\Log;
  */
 class TeacherSubjectService extends BaseService implements ITeacherSubjectService
 {
-    private $teacherSubjectRepository;
+    private $teacherSubjectRepository,$teacherTimeSlotsRepository;
 
-    public function __construct(ITeacherSubjectRepository $teacherSubjectRepository)
+    public function __construct(
+        ITeacherSubjectRepository $teacherSubjectRepository,
+        ITeacherTimeSlotsRepository $teacherTimeSlotsRepository
+    )
     {
         $this->teacherSubjectRepository = $teacherSubjectRepository;
+        $this->teacherTimeSlotsRepository = $teacherTimeSlotsRepository;
     }
 
 
@@ -100,6 +105,34 @@ class TeacherSubjectService extends BaseService implements ITeacherSubjectServic
         } catch (\Exception $e) {
             DB::rollback();
             Log::error('Error while delete subject: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function createTimeSlots($data)
+    {
+        DB::beginTransaction();
+        try {
+
+            $delete = $this->teacherTimeSlotsRepository->deleteByTeacherId($data['teacher_id']);
+            $attr = [];
+            foreach ($data['time_slots'] as $key => $value) {
+                $attr[] = [
+                    'teacher_id' => $data['teacher_id'],
+                    'time_slot' =>  $value,
+                    'created_at' =>  now(),
+                ];
+            }
+            $this->teacherTimeSlotsRepository->insert($attr);
+            DB::commit();
+
+            return true;
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error('Error while create a new teacher time slots: ' . $e->getMessage());
             return false;
         }
     }

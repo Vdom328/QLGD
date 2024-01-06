@@ -81,17 +81,20 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/create', [TeacherSubjectController::class, 'create'])->name('teacherSubject.create');
             Route::post('/create-subject', [TeacherSubjectController::class, 'createSubject'])->name('teacherSubject.createSubject');
             Route::delete('/delete/{id}', [TeacherSubjectController::class, 'delete'])->name('teacherSubject.delete');
+            Route::post('/create-time-slots', [TeacherSubjectController::class, 'createTimeSlots'])->name('teacherSubject.createTimeSlots');
         });
 
         // scheduler routes
         Route::group(['prefix' => 'scheduler'], function () {
             Route::get('/', [SchedulerController::class, 'index'])->name('scheduler.index');
+            Route::get('/create-new', [SchedulerController::class, 'createNew'])->name('scheduler.createNew');
         });
 
         // settings
         Route::group(['prefix' => 'settings'], function () {
             Route::get('/', [SettingController::class, 'index'])->name('settings.index');
             Route::post('/update', [SettingController::class, 'update'])->name('settings.update');
+
         });
     });
 

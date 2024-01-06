@@ -10,19 +10,22 @@
             padding: 3px;
             min-width: 100px !important;
         }
-        .fade-right {
-        position: relative;
-    }
 
-    .fade-right::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 50%; /* Điều chỉnh phần bên phải mờ mờ tùy thuộc vào chiều rộng bạn muốn */
-        background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)); /* Hiệu ứng mờ mờ */
-    }
+        .fade-right {
+            position: relative;
+        }
+
+        .fade-right::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 50%;
+            /* Điều chỉnh phần bên phải mờ mờ tùy thuộc vào chiều rộng bạn muốn */
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+            /* Hiệu ứng mờ mờ */
+        }
     </style>
 @endsection
 
@@ -40,64 +43,91 @@
 @section('page_title_actions')
     <div class="col-12 d-flex flex-wrap align-items-center">
         <div class="col-md-6 col-12 ">
-            <i class="fas fa-angle-right"></i> Thời khóa biểu 
+            <i class="fas fa-angle-right"></i> Thời khóa biểu
+        </div>
+        <div class="d-flex col-md-6 col-12  mt-md-0 mt-2  justify-content-end">
+            <button type="button" id="create_new" class="btn-shadow ms-3 btn btn-primary btn-add-new" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >
+                <i class="fa fa-add"></i>
+                Tạo TKB mới
+            </button>
         </div>
     </div>
 @endsection
 
 @section('content')
-    <div>
-        <div class="row p-3 bg-white rounded-3 customer_table_container shadow-sm">
-            <ul class="mb-0">
-                @foreach ($schedule['missing_credits_subjects'] as $missing_credits_subjects)
-                    <li class="text-danger">{{ $missing_credits_subjects }}</li>
-                @endforeach
-            </ul>
-        </div>
-        <div class="row d-flex pt-3 pb-3 flex-wrap bg-white rounded shadow-sm mt-3">
-            <div class="container">
-                <table class="table table-bordered">
-                    <thead class="thead-light">
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            @foreach ($schedule['class_rooms'] as $class_room)
-                                <th>{{ $class_room->name }}</th>
-                            @endforeach
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($schedule['days'] as $day)
-                            @foreach ($schedule['schedule'] as $key => $value)
-                                @if ($key == $day)
-                                    <tr>
-                                        <td style="width:70px" class="fw-bold"
-                                            rowspan="{{ count($schedule['time_slots']) + 1 }}">{{ $day }}</td>
-                                    </tr>
-                                    @foreach ($value as $time_slots => $class_rooms)
-                                        <tr>
-                                            <td style="width:80px" class="fw-bold">Tiết: {{ $time_slots }}<br></td>
-                                            @foreach ($class_rooms as $class_room)
-                                                {{-- <td @if (isset($class_room['cl'])) style="background:  {{ $class_room['cl'] }}" @endif> --}}
-                                                <td>
-                                                    @if (isset($class_room['ten_mon_hoc']))
-                                                        Môn: {{ $class_room['ten_mon_hoc'] }}<br>
-                                                        Lớp: {{ $class_room['lop'] }} - GV: {{ $class_room['gv'] }}
-                                                    @endif
-                                                </td>
-                                            @endforeach
-                                        </tr>
-                                    @endforeach
-                                @endif
-                            @endforeach
+    <div class="row d-flex pt-3 pb-3 flex-wrap bg-white rounded shadow-sm">
+        <div class="col-12 border_bottom_search pb-2 fw-bold">Tìm kiếm theo:</div>
+        {{--  --}}
+        <div class=" row mt-md-3 col-12 d-flex flex-wrap align-items-center">
+            <div class=" col-lg-6 col-md-6 col-12 mt-lg-0 mt-2 d-flex flex-wrap align-items-center">
+                Trạng thái:
+                <div class="col-lg-7 col-md-6 col-12 ps-2">
+                    <select class="form-select" name="schedule" id="schedule_id">
+                        <option value=""></option>
+                        @foreach ($list_schedule as $list_schedule)
+                            <option value="{{ $list_schedule->id }}">{{ $list_schedule->name }}</option>
                         @endforeach
-                    </tbody>
-                </table>
-
+                    </select>
+                </div>
+            </div>
+            <div class=" col-lg-6 col-md-6 col-12 mt-lg-0 mt-2 d-flex flex-wrap justify-content-end">
+                <button id="btn_filter" type="button" class="btn-dark-dark">Tìm kiếm</button>
             </div>
         </div>
+        {{--  --}}
+    </div>
+    <div id="list_data" class="mt-4">
+        @include('pages.scheduler.partials._table')
     </div>
 @endsection
 
 @section('footer_scripts')
+    <!-- Sử dụng CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+
+    @include('pages.scheduler.partials._modal')
+    <script>
+        $(document).ready(function() {
+
+            // tìm kiếm
+            $(document).on('click', '#btn_filter', function() {
+                $.ajax({
+                    type: 'get',
+                    data: {
+                        id: $('#schedule_id').val(),
+                    },
+                    url: window.location.href,
+                    success: function(response) {
+                        if (response.length != 0) {
+                            $('#list_data').html(response.resultContainer);
+                        }
+                    },
+                });
+            })
+
+            // xuất excel
+            $(document).on('click', '#exportButton', function() {
+                const table = document.getElementById('myTable');
+                const wb = XLSX.utils.table_to_book(table, { sheet: 'SheetJS' });
+                XLSX.writeFile(wb, 'schedule.xlsx');
+            })
+
+            // tạo tkb mới
+            $(document).on('click', '#create_tbk', function() {
+                $.ajax({
+                    type: 'get',
+                    data: {
+                        name: $('#name_tbk').val(),
+                    },
+                    url: "{{ route('scheduler.createNew') }}",
+                    success: function(response) {
+                        if (response.length != 0) {
+                            $('#list_data').html(response.resultContainer);
+                            $('#staticBackdrop').modal('hide');
+                        }
+                    },
+                });
+            });
+        });
+    </script>
 @endsection

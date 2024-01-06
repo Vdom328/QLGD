@@ -4,30 +4,44 @@ namespace App\Classes\Services;
 
 use App\Classes\Enum\StaffStatusEnum;
 use App\Classes\Repository\Interfaces\IClassRoomRepository;
+use App\Classes\Repository\Interfaces\IScheduleErrorRepository;
+use App\Classes\Repository\Interfaces\IScheduleRepository;
+use App\Classes\Repository\Interfaces\IScheduleTableRepository;
 use App\Classes\Repository\Interfaces\ISubjectLabsRepository;
 use App\Classes\Repository\Interfaces\ISubjectRepository;
 use App\Classes\Repository\Interfaces\IUserRepository;
 use App\Classes\Services\Interfaces\ISchedulerService;
 use App\Classes\Services\Interfaces\IUserService;
+use App\Models\ClassRoom;
+use App\Models\Schedule;
+use App\Models\SettingCredits;
 use Carbon\Carbon;
 use App\Models\TeacherSubject;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Implement UserService
  */
 class SchedulerService implements ISchedulerService
 {
-    private $subjectRepository, $classRoomRepository, $userRepository;
+    private $subjectRepository, $classRoomRepository, $userRepository,$scheduleRepository,$scheduleTableRepository,$scheduleErrorRepository;
 
     public function __construct(
         ISubjectRepository $subjectRepository,
         IClassRoomRepository $classRoomRepository,
-        IUserRepository $userRepository
+        IUserRepository $userRepository,
+        IScheduleRepository $scheduleRepository,
+        IScheduleTableRepository $scheduleTableRepository,
+        IScheduleErrorRepository $scheduleErrorRepository
     ) {
         $this->subjectRepository = $subjectRepository;
         $this->classRoomRepository = $classRoomRepository;
         $this->userRepository = $userRepository;
+        $this->scheduleRepository = $scheduleRepository;
+        $this->scheduleTableRepository = $scheduleTableRepository;
+        $this->scheduleErrorRepository = $scheduleErrorRepository;
     }
 
     private function getClassRooms()
@@ -60,11 +74,11 @@ class SchedulerService implements ISchedulerService
      * @inheritDoc
      */
 
-    public function getData()
+    public function getData($data)
     {
         // $days = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
         $days = ['Thứ 2', 'Thứ 3', 'Thứ 4'];
-        $time_slots = range(1, 11);
+        $time_slots = range(1, time_slots());
         $class_rooms = $this->getClassRooms();
         $subjects = $this->getSubjects();
         $schedule = $this->getSchedules($days, $time_slots, $class_rooms);
@@ -134,13 +148,15 @@ class SchedulerService implements ISchedulerService
             }
         }
         $missing_credits_subjects = $this->checkMissingCredits($subject_total_credits_added);
-        return [
-            'class_rooms' => $class_rooms,
-            'days' => $days,
-            'time_slots' => $time_slots,
-            'schedule' => $schedule,
-            'missing_credits_subjects' => $missing_credits_subjects
-        ];
+
+        // create db
+        $create = $this->createNewData($data,$schedule, $missing_credits_subjects);
+
+        if ($create == false) {
+            return false;
+        }
+
+        return $this->getSchedule(['id' => $create]);
     }
 
 
@@ -216,7 +232,8 @@ class SchedulerService implements ISchedulerService
                 'ten_mon_hoc' => $subject->subject->name,
                 'lop' => $subject->class,
                 'gv' => $subject->teacher->profile->full_name,
-                'cl' => $subject->color
+                'cl' => $subject->color,
+                'teacher_subjects_id' => $subject->id
             ] ;
         }
         return $schedule;
@@ -227,16 +244,14 @@ class SchedulerService implements ISchedulerService
      */
     private function check_quantity_credits($subject)
     {
+
         $subject_weekly_max = 1;
         $subject_day_max = 1;
 
-        if ($subject->subject->quantity_credits == 3) {
-            $subject_weekly_max = 6;
-            $subject_day_max = 3;
-        } elseif ($subject->subject->quantity_credits == 2) {
-            $subject_weekly_max = 4;
-            $subject_day_max = 2;
-        }
+        $data = SettingCredits::where('quantity_credits', $subject->subject->quantity_credits)->first();
+
+        $subject_weekly_max =  $data->subject_weekly_max;
+        $subject_day_max = $data->subject_day_max;;
 
         if ($subject->subject->block >  $subject_day_max) {
             $subject_day_max = $subject->subject->block;
@@ -275,4 +290,119 @@ class SchedulerService implements ISchedulerService
         // Ví dụ: xuất thông báo, gửi email thông báo, v.v.
     }
 
+
+    /**
+     * create a new db instance
+     * @param array $data
+     * @param array $schedule
+     */
+    public function createNewData($data, $schedule,$missing_credits_subjects)
+    {
+        DB::beginTransaction();
+        try {
+        // create db schedule
+            $attr = [
+                'name' => $data['name']
+            ];
+            $create_schedule = $this->scheduleRepository->create($attr);
+
+            // create db schedule table
+            $attr_table = [];
+            foreach ($schedule as $day => $value) {
+
+                foreach ($value as $time_slots => $item) {
+
+                    foreach ($item as $class_room_id => $array) {
+
+                        if (isset($array['teacher_subjects_id'])) {
+                            $attr_table[] = [
+                                'schedule_id' => $create_schedule->id,
+                                'day' => $day,
+                                'time_slots' => $time_slots,
+                                'class_room_id' => $class_room_id,
+                                'teacher_subjects_id' => $array['teacher_subjects_id'],
+                            ];
+                        }
+
+                    }
+
+                }
+            }
+            $create_schedule_table = $this->scheduleTableRepository->insert($attr_table);
+
+            // create schedule error
+            $attr_error = [];
+            foreach ($missing_credits_subjects as $key => $error) {
+                $attr_error[] = [
+                    'schedule_id' => $create_schedule->id,
+                    'error' => $error
+                ];
+            }
+            $create_schedule_table = $this->scheduleErrorRepository->insert($attr_error);
+
+
+            DB::commit();
+
+            return $create_schedule->id;
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error('Error while create new schedule: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSchedule($data)
+    {
+        if (isset($data['id'])) {
+            $schedule  = Schedule::where('id', $data['id'] )->with('schedule_table','schedule_error')->first();
+        }else{
+            $schedule  = Schedule::latest()->with('schedule_table','schedule_error')->first();
+        }
+        // Khởi tạo mảng kết quả rỗng
+        $result = [];
+        $class_rooms = [];
+
+        if ($schedule && $schedule->schedule_table) {
+            // Lấy thông tin từ schedule_table của schedule
+            $tableData = $schedule->schedule_table;
+
+            foreach ($tableData as $data) {
+                $class_rooms[$data->class_room_id] =  [
+                    'id' => $data->class_room_id,
+                    'name' => ClassRoom::where('id', $data->class_room_id)->first()->name
+                ];
+
+                $day = $data->day;
+                $timeSlots = $data->time_slots;
+                $classRoomId = $data->class_room_id;
+                $teacherSubjectsId = $data->teacher_subjects_id;
+                $subject = TeacherSubject::where('id', $teacherSubjectsId)->first();
+                // Tạo cấu trúc mảng theo ý muốn
+                for ($i = 0; $i < $timeSlots; $i++) {
+                    $result[$day][$i + 1][$classRoomId] = [
+                        'ten_mon_hoc' => $subject->subject->name,
+                        'lop' => $subject->class,
+                        'gv' => $subject->teacher->profile->full_name,
+                        'cl' => $subject->color,
+                    ];
+                }
+            }
+        }
+        return [
+            'class_rooms' => $class_rooms,
+            'schedule' => $result,
+            'schedule_error' => $schedule['schedule_error']
+        ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getListSchedule()
+    {
+        return $this->scheduleRepository->find([]);
+    }
 }

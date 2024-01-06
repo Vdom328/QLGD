@@ -46,6 +46,6 @@ class SubjectRepository  extends BaseRepository implements ISubjectRepository
         if (isset($data['paginate']) && $data['paginate'] == 'false') {
             return $query->get();
          }
-        return $query->with('subject_labs')->paginate(Config::get('const.pagination'));
+        return $query->with('subject_labs')->paginate(paginate());
     }
 }

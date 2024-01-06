@@ -23,9 +23,9 @@ class UserRepository extends BaseRepository implements IUserRepository
     public function filterStaffs($data)
     {
         if ($data == 1) {
-            $query = $this->model->where('status', $data)->paginate(Config::get('const.pagination'));
+            $query = $this->model->where('status', $data)->paginate(paginate());
         } else {
-            $query = $this->model->paginate(Config::get('const.pagination'));
+            $query = $this->model->paginate(paginate());
         }
         return $query;
     }
@@ -41,7 +41,7 @@ class UserRepository extends BaseRepository implements IUserRepository
             ->leftJoin('profiles', 'users.id', '=', 'profiles.user_id')
             ->leftJoin('role_user', 'users.id', '=', 'role_user.user_id')
             ->orderBy($column, $direction)
-            ->paginate(Config::get('const.pagination'));
+            ->paginate(paginate());
     }
 
     public function getListStaffs($data)
@@ -61,7 +61,7 @@ class UserRepository extends BaseRepository implements IUserRepository
             $query = $query->where('status', StaffStatusEnum::VALID);
         }
 
-        $staffs = $query->paginate(Config::get('const.pagination'));
+        $staffs = $query->paginate(paginate());
 
         $attr = [
             'column' => $column,
@@ -111,6 +111,6 @@ class UserRepository extends BaseRepository implements IUserRepository
             return $query->get();
         }
         // Paginate the results
-        return $query->paginate(Config::get('const.pagination'));
+        return $query->paginate(paginate());
     }
 }

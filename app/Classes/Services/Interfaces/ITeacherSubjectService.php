@@ -27,4 +27,10 @@ interface ITeacherSubjectService
      * @param int $id
      */
     public function delete($id);
+
+    /**
+     * create a new data
+     * @param array $data
+     */
+    public function createTimeSlots($data);
 }

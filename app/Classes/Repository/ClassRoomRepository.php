@@ -35,6 +35,6 @@ class ClassRoomRepository  extends BaseRepository implements IClassRoomRepositor
            return $query->get();
         }
 
-        return $query->paginate(Config::get('const.pagination'));
+        return $query->paginate(paginate());
     }
 }

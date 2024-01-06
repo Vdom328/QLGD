@@ -7,6 +7,7 @@ use App\Classes\Services\Interfaces\ITeacherSubjectService;
 use App\Classes\Services\Interfaces\IUserService;
 use App\Models\Subject;
 use App\Models\TeacherSubject;
+use App\Models\TeacherTimeSlots;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -48,7 +49,8 @@ class TeacherSubjectController extends Controller
         $teacher = $this->userService->finById($id);
         $subject = $this->subjectService->filter(['paginate' => 'false']);
         $data = $this->teacherSubjectService->finByTeacherId($id);
-        return view('pages.teacher-subject.edit', compact('teacher', 'subject', 'data'));
+        $teacher_time_slots = TeacherTimeSlots::where('teacher_id', $id)->get();
+        return view('pages.teacher-subject.edit', compact('teacher', 'subject', 'data','teacher_time_slots'));
     }
 
     /**
@@ -86,5 +88,19 @@ class TeacherSubjectController extends Controller
             return response()->json([ ]);
         }
         return response()->json([ ]);
+    }
+
+    /**
+     * create time slot
+     */
+    public function createTimeSlots(Request $request)
+    {
+        $create = $this->teacherSubjectService->createTimeSlots($request->all());
+        if ($create == false) {
+            Session::flash('error', "Thêm tiết học ưu tiên thất bạt !");
+            return redirect()->back();
+        }
+        Session::flash('success', "Thêm tiết học ưu tiên thành công !");
+        return redirect()->route('teacherSubject.update', $request->teacher_id);
     }
 }

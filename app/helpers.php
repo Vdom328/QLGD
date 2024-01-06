@@ -3,6 +3,7 @@
 use App\Classes\Enum\CompanyDateEnum;
 use App\Models\User;
 use App\Models\ControlDailyNote;
+use App\Models\Settings;
 use Illuminate\Support\Facades\Auth;
 
 if (!function_exists('formatDate')) {
@@ -111,3 +112,15 @@ function formatNumber($number)
         return number_format($number, 1);
     }
 }
+
+function time_slots()
+{
+    $setting = Settings::where('id',1)->first();
+    return $setting->time_slots;
+}
+function paginate()
+{
+    $setting = Settings::where('id',1)->first();
+    return $setting->paginate;
+}
+
