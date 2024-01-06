@@ -1,8 +1,10 @@
 <div class="row p-3 bg-white rounded-3 customer_table_container shadow-sm">
     <ul class="mb-0">
-        @foreach ($schedule['schedule_error'] as $missing_credits_subjects)
-            <li class="text-danger">{{ $missing_credits_subjects->error }}</li>
-        @endforeach
+        @if ($schedule['schedule_error'] != '')
+            @foreach ($schedule['schedule_error'] as $missing_credits_subjects)
+                <li class="text-danger">{{ $missing_credits_subjects->error }}</li>
+            @endforeach
+        @endif
     </ul>
 </div>
 <div class="col-12 mt-3 d-flex flex-wrap align-items-center">

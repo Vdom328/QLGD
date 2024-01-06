@@ -118,6 +118,12 @@ class TeacherSubjectService extends BaseService implements ITeacherSubjectServic
         try {
 
             $delete = $this->teacherTimeSlotsRepository->deleteByTeacherId($data['teacher_id']);
+
+            if (isset($data['time_slots']) <=0) {
+                DB::commit();
+
+                return true;
+            }
             $attr = [];
             foreach ($data['time_slots'] as $key => $value) {
                 $attr[] = [

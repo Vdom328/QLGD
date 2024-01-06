@@ -77,6 +77,7 @@
         {{--  --}}
     </div>
     <div id="list_data" class="mt-4">
+
         @include('pages.scheduler.partials._table')
     </div>
 @endsection

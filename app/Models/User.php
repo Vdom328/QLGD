@@ -135,4 +135,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(TeacherSubject::class, 'teacher_id');
     }
+
+    public function teacher_time_slots()
+    {
+        return $this->hasMany(TeacherTimeSlots::class, 'teacher_id');
+    }
 }
