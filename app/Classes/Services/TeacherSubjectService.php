@@ -142,4 +142,12 @@ class TeacherSubjectService extends BaseService implements ITeacherSubjectServic
             return false;
         }
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function filter($data)
+    {
+        return $this->teacherSubjectRepository->filter($data);
+    }
 }

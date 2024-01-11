@@ -9,4 +9,6 @@ interface ITeacherSubjectRepository extends IBaseRepository
      * delete data by teacher_id
      */
     public function deleteData($teacher_id);
+
+    public function filter($data);
 }

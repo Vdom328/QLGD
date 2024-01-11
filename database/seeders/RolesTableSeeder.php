@@ -31,6 +31,12 @@ class RolesTableSeeder extends Seeder
                 'description' => 'teacher',
                 'level'       => 2,
             ],
+            [
+                'name'        => 'student',
+                'slug'        => 'student',
+                'description' => 'student',
+                'level'       => 2,
+            ],
         ];
 
         /*

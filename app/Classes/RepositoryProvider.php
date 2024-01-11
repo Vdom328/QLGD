@@ -39,5 +39,7 @@ class RepositoryProvider extends ServiceProvider
         App::bind(IRepository\IScheduleTableRepository::class, Repository\ScheduleTableRepository::class);
         App::bind(IRepository\IScheduleErrorRepository::class, Repository\ScheduleErrorRepository::class);
         App::bind(IRepository\ITeacherTimeSlotsRepository::class, Repository\TeacherTimeSlotsRepository::class);
+        App::bind(IRepository\IClassRepository::class, Repository\ClassRepository::class);
+        App::bind(IRepository\IStudentSubjectRepository::class, Repository\StudentSubjectRepository::class);
     }
 }

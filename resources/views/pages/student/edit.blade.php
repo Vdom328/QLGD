@@ -1,6 +1,3 @@
-@php
-    use App\Classes\Enum\RoleUserEnum;
-@endphp
 @extends('layouts.app')
 
 @section('template_linked_css')
@@ -47,20 +44,20 @@
 @endsection
 
 @section('page_icon')
-    <img src="{{ asset('assets/images/icons/truck.png') }}" />
+    <img src="{{ asset('assets/images/icons/edit.png') }}" />
 @endsection
 
 @section('page_title')
-    Giảng viên chỉ định
+    Sinh viên chỉ định
 @endsection
 @section('title-page')
-    Giảng viên chỉ định
+    Sinh viên chỉ định
 @endsection
 
 @section('page_title_actions')
     <div class="col-12 d-flex flex-wrap align-items-center">
         <div class="col-md-6 col-12 ">
-            <div><i class="fas fa-angle-right"></i> Giảng viên chỉ định <i class="fas fa-angle-right"></i> Chỉnh sửa</div>
+            <div><i class="fas fa-angle-right"></i> Sinh viên chỉ định <i class="fas fa-angle-right"></i> Chỉnh sửa</div>
         </div>
     </div>
 @endsection
@@ -72,10 +69,10 @@
             <div class="col-md-6 col-12">
                 {{-- name class room --}}
                 <div class="d-flex flex-wrap align-items-center mb-2">
-                    <label for="name">Tên giảng viên</label>
+                    <label for="name">Tên sinh viên</label>
                     <div class="col-md-12 col-12 d-flex align-items-center">
                         <div class="col-md-6 col-12">
-                            <input type="text" class="form-control" disabled value="{{ $teacher->profile->fullname }}">
+                            <input type="text" class="form-control" disabled value="{{ $student->profile->fullname }}">
                         </div>
                     </div>
                 </div>
@@ -83,47 +80,16 @@
             <div class="col-md-6 col-12">
                 {{-- name class room --}}
                 <div class="d-flex flex-wrap align-items-center mb-2">
-                    <label for="name">Mã giảng viên</label>
+                    <label for="name">Mã sinh viên</label>
                     <div class="col-md-12 col-12 d-flex align-items-center">
                         <div class="col-md-6 col-12">
-                            <input type="text" class="form-control" disabled value="{{ $teacher->profile->staff_no }}">
+                            <input type="text" class="form-control" disabled value="{{ $student->profile->staff_no }}">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-12 col-12 d-flex flex-wrap">
-            <div class="col-12">
-                {{-- name class room --}}
-                <div class="d-flex flex-wrap align-items-center mb-2">
-                    <label for="name">Tiết học ưu tiên</label>
-                    <form action="{{ route('teacherSubject.createTimeSlots') }}" method="post" class="col-md-12 col-12 d-flex align-items-center">
-                        @csrf
-                        <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
-                        <select class="js-example-basic-multiple-limit" name="time_slots[]" multiple="multiple">
 
-                            @for ($i = 1; $i <= time_slots(); $i++)
-                                <option value="{{ $i }}"v @if (isset($teacher_time_slots) && $teacher_time_slots->where('time_slot', $i)->count() >= 1) selected @endif>Tiết {{ $i }}</option>
-                            @endfor
-                        </select>
-                        <button id="btn_filter" type="submit" class="btn-dark-dark ms-2">Lưu</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12 col-12 d-flex flex-wrap">
-            <div class="col-12">
-                {{-- name class room --}}
-                <div class="d-flex flex-wrap align-items-center mb-2">
-                    <label for="name">Chú ý*</label>
-                    <div class="col-md-12 col-12 d-flex align-items-center">
-                        <textarea name="" id="" rows="3" class="form-control" disabled>
-Tiết ưu tiên của mỗi giảng viên sẽ được ghi nhận, trong trường học tiết giảng viên đăng kí trùng với nhiều giảng viên khác thì sẽ lấy giảng viên đăng kí thời gian sớm nhất, và giảng viên đăng kí sau sẽ đẩy xuống tiết tiếp theo !
-                        </textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="col-12 mt-2">
             <table class="table table-hover ">
                 <thead>
@@ -132,31 +98,27 @@ Tiết ưu tiên của mỗi giảng viên sẽ được ghi nhận, trong trư�
                         </th>
                         <th data-column="name" data-direction="desc" class="sort_table">Tên môn học
                         </th>
-                        <th>Lớp</th>
-                        @if (Auth()->user()->level() == RoleUserEnum::ADMIN->value)
-                            <th></th>
-                        @endif
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody id="list_data">
-                    @include('pages.teacher-subject.partials._list-subject')
+                    @include('pages.student.partials._list-subject')
                 </tbody>
             </table>
         </div>
-        @if (Auth()->user()->level() == RoleUserEnum::ADMIN->value)
-            <div class="col-12 d-flex flex-wrap align-items-center">
-                <div class="d-flex col-12  mt-md-0 mt-2  justify-content-end">
-                    <a class="btn-grey btn-modal cursor-pointer" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Thêm
-                        môn học cho
-                        giảng viên</a>
-                </div>
+
+        <div class="col-12 d-flex flex-wrap align-items-center">
+            <div class="d-flex col-12  mt-md-0 mt-2  justify-content-end">
+                <a class="btn-grey btn-modal cursor-pointer" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Thêm
+                    môn học cho
+                    sinh viên</a>
             </div>
-        @endif
+        </div>
     </div>
 @endsection
 
 @section('footer_scripts')
-    @include('pages.teacher-subject.partials._modal')
+    @include('pages.student.partials._modal')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     @include('modals.modal-ajax-delete')
     @include('scripts.ajax-modal-delete-script')
@@ -177,36 +139,23 @@ Tiết ưu tiên của mỗi giảng viên sẽ được ghi nhận, trong trư�
                 let selectedSubjects = [];
 
                 // Lặp qua tất cả các checkbox
-                $('input[name="class"]:checked').each(function() {
-                    selectedSubjects.push($(this)
-                        .val()); // Thêm giá trị của checkbox đã chọn vào mảng
+                $('input[type="checkbox"].class:checked').each(function() {
+                    selectedSubjects.push($(this).val());
                 });
+                console.log(selectedSubjects);
                 $.ajax({
                     type: 'post',
                     data: {
                         selectedSubjects: selectedSubjects,
-                        teacher_id: {{ $teacher->id }}
+                        student_id: {{ $student->id }}
                     },
-                    url: "{{ route('teacherSubject.createSubject') }}",
+                    url: "{{ route('student.createSubject') }}",
                     success: function(response) {
+                        console.log(response);
                         if (response.length != 0) {
                             $('#list_data').html(response.resultContainer);
                             $('#staticBackdrop').modal('hide');
                         }
-                    },
-                });
-            });
-
-            $(document).on('change', '.change_class', function() {
-                $.ajax({
-                    type: 'post',
-                    data: {
-                        id: $(this).attr('data-id'),
-                        class: $(this).val()
-                    },
-                    url: "{{ route('teacherSubject.create') }}",
-                    success: function(response) {
-                        console.log(response);
                     },
                 });
             });

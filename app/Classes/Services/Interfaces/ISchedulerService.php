@@ -20,4 +20,9 @@ interface ISchedulerService
      * get list schedule
      */
     public function getListSchedule();
+
+    /**
+     * get schedule by user
+     */
+    public function getScheduleByUser($user);
 }

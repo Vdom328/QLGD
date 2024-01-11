@@ -86,6 +86,12 @@ class UserRepository extends BaseRepository implements IUserRepository
             });
         }
 
+        if (isset($data['student']) && $data['student'] === 'true') {
+            $query->whereHas('roles', function ($subQuery) {
+                $subQuery->where('roles.id', RoleUserEnum::STUDENT->value);
+            });
+        }
+
         // Filter by status if provided
         if (isset($data['status'])) {
             $query->where('users.status', $data['status']);

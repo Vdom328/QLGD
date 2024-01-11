@@ -33,4 +33,10 @@ interface ITeacherSubjectService
      * @param array $data
      */
     public function createTimeSlots($data);
+
+    /**
+     * filter data
+     * @param array $data
+     */
+    public function filter($data);
 }

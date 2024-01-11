@@ -13,6 +13,9 @@
         <i class="fa-solid fa-file-export"></i>
         Xuất CSV
     </button>
+    <button type="button" class="btn-shadow ms-3 btn btn-primary btn-add-new " data-id-schedule="{{ $schedule['id'] }}">
+        Dùng TKB
+    </button>
 </div>
 <div class="row d-flex pt-3 pb-3 flex-wrap bg-white rounded shadow-sm mt-3">
     <div class="container">
@@ -36,11 +39,14 @@
                         <tr>
                             <td style="width:80px" class="fw-bold">Tiết: {{ $time_slots }}<br></td>
                             @foreach ($schedule['class_rooms'] as $room)
-                                <td>
-                                    @if (isset($class_rooms[$room['id']]))
-                                        Môn: {{ $class_rooms[$room['id']]['ten_mon_hoc'] }}<br>
-                                        Lớp: {{ $class_rooms[$room['id']]['lop'] }}<br>
-                                        GV: {{ $class_rooms[$room['id']]['gv'] }}
+                                <td
+                                    @if (isset($class_rooms[$room->id]['cl'])) style="background: linear-gradient(to left, #89a3cd 98%, {{ $class_rooms[$room->id]['cl'] }} 50%);"
+                                        class="text-center" @endif>
+                                    @if (isset($class_rooms[$room->id]['lop']))
+                                        <span class="fw-bold">{{ $class_rooms[$room->id]['ten_mon_hoc'] }}</span>
+                                        <span> Lớp: {{ $class_rooms[$room->id]['lop'] }}</span><br>
+                                        <span style="color: #b64e4e" class="fw-bold">GV:
+                                            {{ $class_rooms[$room->id]['gv'] }}</span>
                                     @endif
                                 </td>
                             @endforeach

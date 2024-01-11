@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ClassRoomController;
 use App\Http\Controllers\LabsController;
 use App\Http\Controllers\StaffsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SchedulerController;
+use App\Http\Controllers\ScheduleUserController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherSubjectController;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +37,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/radom/staff_no', [ProfileController::class, 'radomStaffNo'])->name('profile.radomStaffNo');
     });
 
-    Route::group(['prefix' => 'setting', 'middleware' => ['role:admin']], function () {
+    Route::group(['prefix' => 'setting'], function () {
 
         // route staffs
         Route::group(['prefix' => 'staffs'], function () {
@@ -94,10 +97,31 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group(['prefix' => 'settings'], function () {
             Route::get('/', [SettingController::class, 'index'])->name('settings.index');
             Route::post('/update', [SettingController::class, 'update'])->name('settings.update');
+        });
 
+         // route classes
+         Route::group(['prefix' => 'class'], function () {
+            Route::get('/', [ClassController::class, 'index'])->name('class.index');
+            Route::get('/create', [ClassController::class, 'create'])->name('class.create');
+            Route::post('/post-register', [ClassController::class, 'postRegister'])->name('class.postRegister');
+            Route::get('/update/{id}', [ClassController::class, 'update'])->name('class.update');
+            Route::post('/update', [ClassController::class, 'saveUpdate'])->name('class.saveUpdate');
+            Route::delete('/delete/{id}', [ClassController::class, 'delete'])->name('class.delete');
+        });
+
+        // student routes
+        Route::group(['prefix' => 'student'], function () {
+            Route::get('/', [StudentController::class, 'index'])->name('student.index');
+            Route::get('/update/{id}', [StudentController::class, 'update'])->name('student.update');
+            Route::post('/create', [StudentController::class, 'createSubject'])->name('student.createSubject');
+            Route::delete('/delete/{id}', [StudentController::class, 'delete'])->name('student.delete');
+        });
+
+        // schedule user routes
+        Route::group(['prefix' => 'schedule-user'], function () {
+            Route::get('/', [ScheduleUserController::class, 'index'])->name('scheduleUser.index');
         });
     });
-
 
 });
 

@@ -9,22 +9,8 @@
         .table td {
             padding: 3px;
             min-width: 100px !important;
-        }
+            height: 37px;
 
-        .fade-right {
-            position: relative;
-        }
-
-        .fade-right::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            width: 50%;
-            /* Điều chỉnh phần bên phải mờ mờ tùy thuộc vào chiều rộng bạn muốn */
-            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-            /* Hiệu ứng mờ mờ */
         }
     </style>
 @endsection
@@ -60,12 +46,14 @@
         {{--  --}}
         <div class=" row mt-md-3 col-12 d-flex flex-wrap align-items-center">
             <div class=" col-lg-6 col-md-6 col-12 mt-lg-0 mt-2 d-flex flex-wrap align-items-center">
-                Trạng thái:
+                Tên:
                 <div class="col-lg-7 col-md-6 col-12 ps-2">
                     <select class="form-select" name="schedule" id="schedule_id">
                         <option value=""></option>
                         @foreach ($list_schedule as $list_schedule)
-                            <option value="{{ $list_schedule->id }}">{{ $list_schedule->name }}</option>
+                            <option value="{{ $list_schedule->id }}" @if ($schedule['id'] ==  $list_schedule->id)
+                                selected
+                            @endif>{{ $list_schedule->name }}</option>
                         @endforeach
                     </select>
                 </div>

@@ -10,4 +10,13 @@ class ScheduleTable extends Model
     use HasFactory;
     protected $table = 'schedule_table';
     protected $guarded = [];
+    public function teacher_subject()
+    {
+        return $this->hasOne(TeacherSubject::class, 'id', 'teacher_subjects_id');
+    }
+
+    public function class_room()
+    {
+        return $this->hasOne(ClassRoom::class, 'id', 'class_room_id');
+    }
 }
