@@ -91,6 +91,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group(['prefix' => 'scheduler'], function () {
             Route::get('/', [SchedulerController::class, 'index'])->name('scheduler.index');
             Route::get('/create-new', [SchedulerController::class, 'createNew'])->name('scheduler.createNew');
+            Route::get('/save-schedule/{id}', [SchedulerController::class, 'saveSchedule'])->name('scheduler.saveSchedule');
         });
 
         // settings

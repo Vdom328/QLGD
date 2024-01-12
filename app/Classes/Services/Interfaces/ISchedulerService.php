@@ -25,4 +25,9 @@ interface ISchedulerService
      * get schedule by user
      */
     public function getScheduleByUser($user);
+
+    /**
+     * save schedule by id
+     */
+    public function saveSchedule($id);
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Classes\Services\Interfaces\ISchedulerService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class SchedulerController extends Controller
 {
@@ -50,5 +51,20 @@ class SchedulerController extends Controller
         return response()->json([
             'resultContainer' => $resultContainer,
         ]);
+    }
+
+    /**
+     * save schedule information
+     * @param int $id
+     */
+    public function saveSchedule($id)
+    {
+        $update = $this->schedulerService->saveSchedule($id);
+        if ($update == false) {
+            Session::flash('error', "Một lỗi đã xảy ra. Vui lòng thử lại !");
+            return redirect()->back();
+        }
+        Session::flash('success', "Chỉnh sửa thành công !");
+        return redirect()->route('scheduler.index');
     }
 }

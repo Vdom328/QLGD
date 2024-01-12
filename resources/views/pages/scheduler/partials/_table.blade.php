@@ -13,9 +13,9 @@
         <i class="fa-solid fa-file-export"></i>
         Xuất CSV
     </button>
-    <button type="button" class="btn-shadow ms-3 btn btn-primary btn-add-new " data-id-schedule="{{ $schedule['id'] }}">
+    <a href="{{ route('scheduler.saveSchedule', $schedule['id']) }}" class="btn-shadow ms-3 btn btn-primary btn-add-new " >
         Dùng TKB
-    </button>
+    </a>
 </div>
 <div class="row d-flex pt-3 pb-3 flex-wrap bg-white rounded shadow-sm mt-3">
     <div class="container">
@@ -40,7 +40,7 @@
                             <td style="width:80px" class="fw-bold">Tiết: {{ $time_slots }}<br></td>
                             @foreach ($schedule['class_rooms'] as $room)
                                 <td
-                                    @if (isset($class_rooms[$room->id]['cl'])) style="background: linear-gradient(to left, #89a3cd 98%, {{ $class_rooms[$room->id]['cl'] }} 50%);"
+                                    @if (isset($class_rooms[$room->id]['cl'])) style="background: linear-gradient(to left, #afc8f0 98%, {{ $class_rooms[$room->id]['cl'] }} 50%);"
                                         class="text-center" @endif>
                                     @if (isset($class_rooms[$room->id]['lop']))
                                         <span class="fw-bold">{{ $class_rooms[$room->id]['ten_mon_hoc'] }}</span>

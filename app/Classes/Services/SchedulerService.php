@@ -509,7 +509,8 @@ class SchedulerService implements ISchedulerService
      */
     public function getScheduleByUser($user)
     {
-        $schedule  = Schedule::latest()->with('schedule_table', 'schedule_error')->first();
+        // $schedule  = Schedule::latest()->with('schedule_table', 'schedule_error')->first();
+        $schedule  = Schedule::where('status', Config::get('const.status.yes'))->first();
 
         $userSubjectIds =  [];
 
@@ -552,5 +553,25 @@ class SchedulerService implements ISchedulerService
             }
         }
         return $result;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function saveSchedule($id)
+    {
+
+        DB::beginTransaction();
+        try {
+            Schedule::where('status', Config::get('const.status.yes'))->update(['status' => Config::get('const.status.no')]);
+            $update  = Schedule::find($id)->update(['status' => Config::get('const.status.yes')]);
+            DB::commit();
+
+            return true;
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error('Error while update status schedule: ' . $e->getMessage());
+            return false;
+        }
     }
 }

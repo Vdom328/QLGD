@@ -72,8 +72,8 @@
                                 @foreach ($data as $day => $value)
                                     <td class="text-center" style="vertical-align: top;">
                                         @foreach ($value[$time] as $item)
-                                            <div @if (count($value[$time]) >= 2) style="border-bottom: 1px solid #ffff; background: linear-gradient(to left, #cd8989 98%, {{ $item['cl'] }} 2%);"
-                                        @else style="background: linear-gradient(to left, #89a3cd 98%, {{ $item['cl'] }} 2%);"  @endif
+                                            <div @if (count($value[$time]) >= 2) style="border-bottom: 1px solid #ffff; background: linear-gradient(to left, #ffbdbd 98%, {{ $item['cl'] }} 2%);"
+                                        @else style="background: linear-gradient(to left, #afc8f0 98%, {{ $item['cl'] }} 2%);"  @endif
                                             >
                                                 <span class="fw-bold">{{ $item['ten_mon_hoc'] }}</span>
                                                 <span>Lớp: {{ $item['lop'] }}</span><br>
