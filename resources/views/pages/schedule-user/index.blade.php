@@ -41,7 +41,40 @@
     Mầu đỏ tượng trưng cho thời khóa biểu ngày hôm đó bị trùng môn trong cùng 1 tiết học
     Nếu có hãy đăng kí lại môn học của Sinh viên</textarea>
     </div>
-    <div id="list_data" class="mt-4">
+
+    <div class="row d-flex pt-3 pb-3 flex-wrap bg-white rounded shadow-sm mt-4" >
+        <div class="col-12 border_bottom_search pb-2 fw-bold">Tìm kiếm theo:</div>
+        {{--  --}}
+        <div class=" row mt-md-3 col-12 d-flex flex-wrap align-items-center">
+            <div class=" col-lg-6 col-md-6 col-12 mt-lg-0 mt-2 d-flex flex-wrap align-items-center">
+                Tên:
+                <div class="col-lg-7 col-md-6 col-12 ps-2">
+                    <select class="form-select" name="user_filter" id="user_filter">
+                        <option value=""></option>
+                        @foreach ($list_user as $item_user )
+                            @if ($item_user->level() == RoleUserEnum::ADMIN->value)
+                                @continue
+                            @endif
+                            <option value="{{ $item_user->id }}">
+                                @if ($item_user->level() == RoleUserEnum::STUDENT->value)
+                                    SV:
+                                @else
+                                    GV:
+                                @endif
+                                {{  $item_user->profile->full_name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class=" col-lg-6 col-md-6 col-12 mt-lg-0 mt-2 d-flex flex-wrap justify-content-end">
+                <button id="btn_filter" type="button" class="btn-dark-dark">Tìm kiếm</button>
+            </div>
+        </div>
+        {{--  --}}
+    </div>
+
+    <div  class="mt-4">
         <div class="col-12 mt-3 d-flex flex-wrap align-items-center">
             <button type="button" data-bs-toggle="tooltip" id="exportButton" title="Xuất CSV" data-bs-placement="bottom"
                 class="btn-shadow ms-3 btn btn-primary btn-add-new export-csv">
@@ -50,48 +83,8 @@
             </button>
         </div>
         <div class="row d-flex pt-3 pb-3 flex-wrap bg-white rounded shadow-sm mt-3">
-            <div class="container">
-                <table class="table table-bordered" id="myTable">
-                    <thead class="thead-light">
-                        <tr>
-                            <th class="fw-bold text-center">Ca dậy</th>
-                            @foreach ($data as $day => $value)
-                                <th class="fw-bold text-center">
-                                    {{ $day }}
-                                </th>
-                            @endforeach
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                            $time_slots = range(1, time_slots());
-                        @endphp
-                        @foreach ($time_slots as $time)
-                            <tr>
-                                <td style="width:70px" class="fw-bold">Tiết: {{ $time }}</td>
-                                @foreach ($data as $day => $value)
-                                    <td class="text-center" style="vertical-align: top;">
-                                        @foreach ($value[$time] as $item)
-                                            <div @if (count($value[$time]) >= 2) style="border-bottom: 1px solid #ffff; background: linear-gradient(to left, #ffbdbd 98%, {{ $item['cl'] }} 2%);"
-                                        @else style="background: linear-gradient(to left, #afc8f0 98%, {{ $item['cl'] }} 2%);"  @endif
-                                            >
-                                                <span class="fw-bold">{{ $item['ten_mon_hoc'] }}</span>
-                                                <span>Lớp: {{ $item['lop'] }}</span><br>
-                                                <span style="color: #b64e4e" class="fw-bold">Phòng:
-                                                    {{ $item['phong'] }}</span>
-                                                @if (Auth()->user()->level() == RoleUserEnum::STUDENT->value)
-                                                    <br>
-                                                    <span class="fw-bold">GV:
-                                                        {{ $item['gv'] }}</span>
-                                                @endif
-                                            </div>
-                                        @endforeach
-                                    </td>
-                                @endforeach
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+            <div class="container" id="list_data">
+                @include('pages.schedule-user.partials._table')
             </div>
         </div>
     </div>
@@ -110,6 +103,22 @@
                 });
                 XLSX.writeFile(wb, 'schedule.xlsx');
             })
+
+            $(document).on('click', '#btn_filter', function() {
+                $.ajax({
+                    type: 'get',
+                    data: {
+                        user_id: $('#user_filter').val(),
+                    },
+                    url: window.location.href,
+                    success: function(response) {
+                        if (response.length != 0) {
+                            $('#list_data').html(response.resultContainer);
+                        }
+                    },
+                });
+            })
+
         });
     </script>
 @endsection

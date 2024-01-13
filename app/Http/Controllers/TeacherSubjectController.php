@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Classes\Services\Interfaces\ISubjectService;
 use App\Classes\Services\Interfaces\ITeacherSubjectService;
 use App\Classes\Services\Interfaces\IUserService;
+use App\Models\ClassModel;
 use App\Models\Subject;
 use App\Models\TeacherSubject;
 use App\Models\TeacherTimeSlots;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 
 class TeacherSubjectController extends Controller
@@ -50,7 +52,8 @@ class TeacherSubjectController extends Controller
         $subject = $this->subjectService->filter(['paginate' => 'false']);
         $data = $this->teacherSubjectService->finByTeacherId($id);
         $teacher_time_slots = TeacherTimeSlots::where('teacher_id', $id)->get();
-        return view('pages.teacher-subject.edit', compact('teacher', 'subject', 'data','teacher_time_slots'));
+        $class = ClassModel::where('status', Config::get('const.status.yes'))->get();
+        return view('pages.teacher-subject.edit', compact('teacher', 'subject', 'data','teacher_time_slots', 'class'));
     }
 
     /**

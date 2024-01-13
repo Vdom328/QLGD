@@ -80,7 +80,6 @@ class SchedulerService implements ISchedulerService
     public function getData($data)
     {
         $days = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
-        // $days = ['Thứ 2', 'Thứ 3', 'Thứ 4'];
         $time_slots = range(1, time_slots());
         $class_rooms = $this->getClassRooms();
         $subjects = $this->getSubjects();
@@ -118,16 +117,17 @@ class SchedulerService implements ISchedulerService
         $subjectsWithTimeSlots = $subjects->filter(function ($subject) {
             return isset($subject->teacher->teacher_time_slots) && $subject->teacher->teacher_time_slots->count() >= 1;
         });
-        $subjectsArray = $subjectsWithTimeSlots->values()->toArray();
-        // Sort $subjectsArray array using an inline comparison function
-        usort($subjectsArray, function ($a, $b) {
-            $timeSlotsA = collect($a['teacher']['teacher_time_slots'])->min('created_at');
-            $timeSlotsB = collect($b['teacher']['teacher_time_slots'])->min('created_at');
 
-            return strtotime($timeSlotsA) - strtotime($timeSlotsB);
-        });
+        $subjectsCollection = collect($subjectsWithTimeSlots);
+
+        $sortedSubjects = $subjectsCollection->map(function ($subject) {
+            $timeSlotsA = collect($subject->teacher->teacher_time_slots)->min('created_at');
+            $subject->timeSlotsA = strtotime($timeSlotsA);
+            return $subject;
+        })->sortBy('timeSlotsA');
+
         // thêm những môn học được giáo viên chọn để ưu tiên
-        foreach ($subjectsArray as $subject) {
+        foreach ($sortedSubjects as $subject) {
             if (isset($subject->teacher->teacher_time_slots) && $subject->teacher->teacher_time_slots->count() >= 1) {
                 $shuffledDays = $days;
                 shuffle($shuffledDays);
@@ -151,12 +151,12 @@ class SchedulerService implements ISchedulerService
                                 for ($j = 0; $j < count($time_slots); $j++) {
 
                                     // không được trùng lớp
-                                    if (isset($checkDay[$day][$i + $j]) && $checkDay[$day][$i + $j]['class'] === $subject->id) {
+                                    if (isset($checkDay[$day][$i + $j]) && $checkDay[$day][$i + $j]['class_id'] === $subject->class_id) {
                                         $isAvailable = false;
                                         continue 2;
                                     }
                                     // không được trùng giáo viên
-                                    if (isset($checkDay[$day][$i + $j]) && ($checkDay[$day][$i + $j]['teacher'] === $subject->teacher_id || $checkDay[$day][$i + $j]['class'] === $subject->id)) {
+                                    if (isset($checkDay[$day][$i + $j]) && ($checkDay[$day][$i + $j]['teacher'] === $subject->teacher_id || $checkDay[$day][$i + $j]['class_id'] === $subject->class_id)) {
                                         $isAvailable = false;
                                         continue 2;
                                     }
@@ -167,7 +167,7 @@ class SchedulerService implements ISchedulerService
                                     $subject_weekly_count[$subject->id] += $quantityCredits['subject_day_max'];
 
                                     for ($j = 0; $j < $quantityCredits['subject_day_max']; $j++) {
-                                        $checkDay[$day][$i + $j]['class'] = $subject->class;
+                                        $checkDay[$day][$i + $j]['class_id'] = $subject->class->id ?? '';
                                         $checkDay[$day][$i + $j]['teacher'] = $subject->teacher_id;
                                     }
                                     if (!isset($subject_total_credits_added[$subject->id])) {
@@ -222,24 +222,6 @@ class SchedulerService implements ISchedulerService
             }
         }
 
-        // Lặp lại lần nữa tránh sót tiết
-        foreach ($subjects as $subject) {
-            $shuffledDays = $days;
-            shuffle($shuffledDays);
-            foreach ($shuffledDays as $day) {
-                //lấy ra số lượng tiết trong ngày hôm đó và số tiết trogn 1 tuần
-                $quantityCredits = $this->check_quantity_credits($subject);
-
-                // // radom phòng học
-                $shuffledRooms = $class_rooms->toArray();
-                shuffle($shuffledRooms);
-                foreach ($shuffledRooms as $room_id) {
-                    $room_id = $room_id['id'];
-                    // thêm tkb
-                    $this->themTKB($schedule, $checkDay, $subject_weekly_count, $subject, $quantityCredits, $time_slots, $day, $room_id, $subject_total_credits_added);
-                }
-            }
-        }
         $missing_credits_subjects = $this->checkMissingCredits($subject_total_credits_added);
 
         // create db
@@ -265,12 +247,12 @@ class SchedulerService implements ISchedulerService
                 for ($j = 0; $j < count($time_slots); $j++) {
 
                     // không được trùng lớp
-                    if (isset($checkDay[$day][$i + $j]) && $checkDay[$day][$i + $j]['class'] === $subject->id) {
+                    if (isset($checkDay[$day][$i + $j]) && $checkDay[$day][$i + $j]['class_id'] === $subject->class_id) {
                         $isAvailable = false;
                         continue 2;
                     }
                     // không được trùng giáo viên
-                    if (isset($checkDay[$day][$i + $j]) && ($checkDay[$day][$i + $j]['teacher'] === $subject->teacher_id || $checkDay[$day][$i + $j]['class'] === $subject->id)) {
+                    if (isset($checkDay[$day][$i + $j]) && ($checkDay[$day][$i + $j]['teacher'] === $subject->teacher_id || $checkDay[$day][$i + $j]['class_id'] === $subject->class_id)) {
                         $isAvailable = false;
                         continue 2;
                     }
@@ -281,7 +263,7 @@ class SchedulerService implements ISchedulerService
                     $subject_weekly_count[$subject->id] += $quantityCredits['subject_day_max'];
 
                     for ($j = 0; $j < $quantityCredits['subject_day_max']; $j++) {
-                        $checkDay[$day][$i + $j]['class'] = $subject->class;
+                        $checkDay[$day][$i + $j]['class_id'] = $subject->class->id ?? '';
                         $checkDay[$day][$i + $j]['teacher'] = $subject->teacher_id;
                     }
                     if (!isset($subject_total_credits_added[$subject->id])) {
@@ -322,7 +304,7 @@ class SchedulerService implements ISchedulerService
             }
             $schedule[$day][$start_slot + $slot_offset][$class_room_id] = [
                 'ten_mon_hoc' => $subject->subject->name,
-                'lop' => $subject->class,
+                'lop' => $subject->class->name ?? '',
                 'gv' => $subject->teacher->profile->full_name,
                 'cl' => $subject->color,
                 'teacher_subjects_id' => $subject->id
@@ -366,13 +348,13 @@ class SchedulerService implements ISchedulerService
 
             if (!isset($subject_total_credits_added[$subject_id])) {
                 $missing_credits = $quantityCredits['subject_weekly_max'];
-                $missing_credits_subjects[$subject_id] = 'Môn: ' . $subject->subject->name . ', Lớp:' . $subject->class . ' Bị thiếu ' . $missing_credits . ' tiết';
+                $missing_credits_subjects[$subject_id] = 'Môn: ' . $subject->subject->name . ', Lớp:' . ' Bị thiếu ' . $missing_credits . ' tiết';
                 continue;
             }
 
             if ($subject_total_credits_added[$subject_id] < $quantityCredits['subject_weekly_max']) {
                 $missing_credits = $quantityCredits['subject_weekly_max'] - $subject_total_credits_added[$subject_id];
-                $missing_credits_subjects[$subject_id] = 'Môn: ' . $subject->subject->name . ', Lớp:' . $subject->class . ' Bị thiếu ' . $missing_credits . ' tiết';
+                $missing_credits_subjects[$subject_id] = 'Môn: ' . $subject->subject->name . ', Lớp:' . ' Bị thiếu ' . $missing_credits . ' tiết';
             }
         }
 
@@ -446,9 +428,7 @@ class SchedulerService implements ISchedulerService
      */
     public function getSchedule($data)
     {
-        $id = '';
         if (isset($data['id'])) {
-            $id = $data['id'];
             $schedule  = Schedule::where('id', $data['id'])->with('schedule_table', 'schedule_error')->first();
         } else {
             $schedule = Schedule::where('status', Config::get('const.status.yes'))->first();
@@ -482,7 +462,7 @@ class SchedulerService implements ISchedulerService
                 // Tạo cấu trúc mảng theo ý muốn
                 $result[$day][$timeSlots][$classRoomId] = [
                     'ten_mon_hoc' => $subject->subject->name,
-                    'lop' => $subject->class,
+                    'lop' => $subject->class->name ?? '',
                     'gv' => $subject->teacher->profile->full_name,
                     'cl' => $subject->color,
                 ];
@@ -492,7 +472,7 @@ class SchedulerService implements ISchedulerService
             'class_rooms' => $class_rooms,
             'schedule' => $result,
             'schedule_error' => $schedule['schedule_error'] ?? '',
-            'id' => $schedule->id
+            'id' => $schedule->id ?? ''
         ];
     }
 
@@ -509,9 +489,12 @@ class SchedulerService implements ISchedulerService
      */
     public function getScheduleByUser($user)
     {
-        // $schedule  = Schedule::latest()->with('schedule_table', 'schedule_error')->first();
+
         $schedule  = Schedule::where('status', Config::get('const.status.yes'))->first();
 
+        if (!$schedule) {
+           $schedule  = Schedule::latest()->with('schedule_table', 'schedule_error')->first();
+        }
         $userSubjectIds =  [];
 
         if ($user->level() == RoleUserEnum::STAFF->value) {
@@ -522,6 +505,10 @@ class SchedulerService implements ISchedulerService
         if ($user->level() == RoleUserEnum::STUDENT->value) {
             $user_subjects = StudentSubject::where('student_id', $user->id)->get();
             $userSubjectIds = $user_subjects->pluck('teacher_subject_id')->toArray();
+        }
+
+        if (!$schedule) {
+            return [];
         }
 
         $schedule = ScheduleTable::where('schedule_id', $schedule->id)->whereIn('teacher_subjects_id', $userSubjectIds)->with('teacher_subject')->get();
@@ -542,7 +529,7 @@ class SchedulerService implements ISchedulerService
                     foreach ($schedule_users as $schedule_user) {
                         $result[$day][$time_slot][$schedule_user->class_room->name]= [
                             'ten_mon_hoc' => $schedule_user->teacher_subject->subject->name ?? '',
-                            'lop' => $schedule_user->teacher_subject->class ?? '',
+                            'lop' => $schedule_user->teacher_subject->class->name ?? '',
                             'phong' => $schedule_user->class_room->name ?? '',
                             'cl' => $schedule_user->teacher_subject->color ?? '',
                             'gv' => $schedule_user->teacher_subject->teacher->profile->full_name ?? '',

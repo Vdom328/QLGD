@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('teacher_id');
             $table->unsignedBigInteger('subject_id');
-            $table->string('class');
+            $table->unsignedBigInteger('class_id');
             $table->string('color')->nullable();
             $table->timestamps();
         });

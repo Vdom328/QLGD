@@ -25,6 +25,7 @@ class SchedulerController extends Controller
     public function index(Request $request)
     {
         $schedule = $this->schedulerService->getSchedule($request->all());
+        // $schedule= $this->schedulerService->getData(['name' => '1']);
         $list_schedule = $this->schedulerService->getListSchedule();
         // Kiểm tra và hiển thị kết quả
         if (request()->ajax()) {

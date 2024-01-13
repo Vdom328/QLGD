@@ -39,7 +39,7 @@ class TeacherSubjectService extends BaseService implements ITeacherSubjectServic
             $query = $this->teacherSubjectRepository->findById($data['id']);
 
             $attr = [
-                'class' =>$data['class'],
+                'class_id' =>$data['class_id'],
             ];
 
             if ($query) {

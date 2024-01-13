@@ -45,7 +45,7 @@
     @php
         $tkb = $list_schedule->where('status', Config::get('const.status.yes'))->first()
     @endphp
-    <div class="col-12 border_bottom_search pb-2 fw-bold">Thời khóa biểu đang được dùng: {{  $tkb->name }}</div>
+    <div class="col-12 border_bottom_search pb-2 fw-bold">Thời khóa biểu đang được dùng: @if (isset($tkb)) {{  $tkb->name }} @endif</div>
 </div>
     <div class="row d-flex pt-3 pb-3 flex-wrap bg-white rounded shadow-sm">
         <div class="col-12 border_bottom_search pb-2 fw-bold">Tìm kiếm theo:</div>

@@ -20,7 +20,7 @@
                                 <td><input type="checkbox" value="{{ $item->id }}"  id="{{ $item->id }}"
                                     @if (isset($data) && $data->where('teacher_subject_id', $item->id)->count() >= 1) checked
                                     @endif class="form-check-input class"></td>
-                                <td>{{ $item->subject->name }} - Lớp: {{ $item->class }} - GV: {{ $item->teacher->profile->full_name }}</td>
+                                <td>{{ $item->subject->name }} - Lớp: {{ $item->class->name }} - GV: {{ $item->teacher->profile->full_name }}</td>
                             </tr>
                         @endforeach
                     </tbody>

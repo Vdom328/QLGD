@@ -22,4 +22,8 @@ class TeacherSubject extends Model
     {
         return $this->belongsTo(User::class, 'teacher_id');
     }
+    public function class()
+    {
+        return $this->hasOne(ClassModel::class, 'id', 'class_id');
+    }
 }

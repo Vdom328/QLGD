@@ -202,7 +202,7 @@ Tiết ưu tiên của mỗi giảng viên sẽ được ghi nhận, trong trư�
                     type: 'post',
                     data: {
                         id: $(this).attr('data-id'),
-                        class: $(this).val()
+                        class_id: $(this).val()
                     },
                     url: "{{ route('teacherSubject.create') }}",
                     success: function(response) {
