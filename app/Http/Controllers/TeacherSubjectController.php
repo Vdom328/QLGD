@@ -75,7 +75,8 @@ class TeacherSubjectController extends Controller
     {
         $create = $this->teacherSubjectService->createNew($request->all());
         $data = $this->teacherSubjectService->finByTeacherId($request->teacher_id);
-        $resultContainer = view('pages.teacher-subject.partials._list-subject', compact('data'))->render();
+        $class = ClassModel::where('status', Config::get('const.status.yes'))->get();
+        $resultContainer = view('pages.teacher-subject.partials._list-subject', compact('data','class'))->render();
         return response()->json([
             'resultContainer' => $resultContainer,
         ]);

@@ -18,7 +18,7 @@
                     <tbody>
                         @foreach ($subject as $item)
                             <tr data_id = {{ $item->id }}  class="tr_table">
-                                <td><input type="checkbox" name="class" value="{{ $item->id }}" class="form-check-input" id="{{ $item->id }}"></td>
+                                <td><input type="checkbox" name="class" id="" value="{{ $item->id }}" class="form-check-input" id="{{ $item->id }}"></td>
                                 <th>{{ $item->credits_no }}</th>
                                 <td>{{ $item->name }}</td>
                             </tr>
