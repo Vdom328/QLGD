@@ -123,7 +123,7 @@
                     <label for="quantity_credits">Số tín chỉ</label>
                     <div class="col-md-12 col-12 d-flex align-items-center">
                         <div class="col-md-8 col-12">
-                            <input type="number" class="form-control" id="quantity_credits" placeholder="" name="quantity_credits"
+                            <input type="number" class="form-control" id="quantity_credits" placeholder="" name="quantity_credits" max="4"
                                 value="{{ old('quantity_credits') }}">
                         </div>
                     </div>

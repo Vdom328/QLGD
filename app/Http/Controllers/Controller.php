@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Enum\RoleUserEnum;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
@@ -22,5 +23,15 @@ class Controller extends BaseController
     protected function jsonResponse($data, $status = 200): \Illuminate\Http\JsonResponse
     {
         return response()->json($data, $status);
+    }
+
+    public function indexx()
+    {
+        $user = Auth()->user();
+        if ($user->level() == RoleUserEnum::ADMIN->value) {
+            return redirect()->route('staffs');
+        }else{
+            return redirect()->route('scheduleUser.index');
+        }
     }
 }

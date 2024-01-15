@@ -1,7 +1,9 @@
 <?php
 
+use App\Classes\Enum\RoleUserEnum;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ClassRoomController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\LabsController;
 use App\Http\Controllers\StaffsController;
 use App\Http\Controllers\ProfileController;
@@ -29,7 +31,7 @@ Auth::routes();
 Route::redirect('/home', '/', 301);
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('/', [StaffsController::class, 'getListStaffs'])->name('home');
+    Route::get('/', [Controller::class, 'indexx'])->name('home');
     // Profile route
     Route::group(['prefix' => 'profile'], function () {
         Route::get('/{id}', [ProfileController::class, 'index'])->name('profile.index');

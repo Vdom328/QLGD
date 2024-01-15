@@ -92,7 +92,7 @@
 @endsection
 @section('footer_scripts')
     <script type="text/javascript">
-        localStorage.removeItem('sidebar');
+        // localStorage.removeItem('sidebar');
         $('.app-container').addClass('bg-white');
     </script>
     <script>

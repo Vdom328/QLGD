@@ -26,7 +26,7 @@ class SubjectRequest extends FormRequest
             'credits_no' => 'required|unique:subjects,credits_no,' . $this->id,
             'block' => 'required|min:0',
             'status' => 'required',
-            'quantity_credits' =>'required|min:0',
+            'quantity_credits' =>'required|min:0|max:4',
         ];
     }
 }
