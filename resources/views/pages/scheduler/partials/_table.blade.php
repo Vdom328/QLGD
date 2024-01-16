@@ -35,8 +35,11 @@
                         <td style="width:70px" class="fw-bold" rowspan="{{ count($value) + 1 }}"> {{ $day }}
                         </td>
                     </tr>
+                    @php
+                        $number = count($value);
+                    @endphp
                     @foreach ($value as $time_slots => $class_rooms)
-                        <tr>
+                        <tr @if ($time_slots <= $number/2) style="background: #dfdfdf" @else style="background: #f6efd8"  @endif>
                             <td style="width:80px" class="fw-bold">Tiết: {{ $time_slots }}<br></td>
                             @foreach ($schedule['class_rooms'] as $room)
                                 <td

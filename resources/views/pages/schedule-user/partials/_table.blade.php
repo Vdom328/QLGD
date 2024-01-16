@@ -14,10 +14,10 @@
     </thead>
     <tbody>
         @php
-            $time_slots = range(1, time_slots());
+            $time_slots = range(1, time_slots());$number = count($time_slots);
         @endphp
         @foreach ($time_slots as $time)
-            <tr>
+            <tr @if ($time <= $number/2) style="background: #dfdfdf" @else style="background: #f6efd8"  @endif>
                 <td style="width:70px" class="fw-bold">Tiết: {{ $time }}</td>
                 @foreach ($data as $day => $value)
                     <td class="text-center" style="vertical-align: top;">
