@@ -89,11 +89,11 @@ Cài đặt người dùng
                 <div class="col-md-2 col-12 text-md-end">Tên ND</div>
                 <div class="row col-md-10 col-12 d-flex align-items-center">
                     <div class="col-md-3 col-6">
-                        <input type="text" class="form-control" placeholder="姓"
+                        <input type="text" class="form-control"
                             value="{{ old('first_name', $user->profile->first_name ?? '') }}" name="first_name">
                     </div>
                     <div class="col-md-3 col-6">
-                        <input type="text" class="form-control" placeholder="名" name="last_name"
+                        <input type="text" class="form-control"  name="last_name"
                             value="{{ old('last_name', $user->profile->last_name ?? '') }}">
                     </div>
                 </div>
@@ -128,7 +128,7 @@ Cài đặt người dùng
                 <div class="col-md-2 col-12 text-md-end">Email</div>
                 <div class="row col-md-10 col-12 d-flex flex-wrap align-items-center">
                     <div class="col-md-6 col-12">
-                        <input type="text" class="form-control" placeholder="TERASアドレス" name="email"
+                        <input type="text" class="form-control" name="email"
                             value="{{ old('email', $user->email ?? '') }}">
                     </div>
                     <div class="col-md-6 col-12">

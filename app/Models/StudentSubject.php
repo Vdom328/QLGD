@@ -13,11 +13,11 @@ class StudentSubject extends Model
 
     public function teacher_subject()
     {
-        return $this->hasOne(TeacherSubject::class, 'id', 'teacher_subject_id');
+        return $this->hasOne(TeacherSubject::class, 'id', 'teacher_subject_id')->withTrashed();
     }
 
     public function student()
     {
-        return $this->belongsTo(User::class, 'student_id');
+        return $this->belongsTo(User::class, 'student_id')->withTrashed();
     }
 }

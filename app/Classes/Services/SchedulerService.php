@@ -458,7 +458,7 @@ class SchedulerService implements ISchedulerService
                 $timeSlots = $data->time_slots;
                 $classRoomId = $data->class_room_id;
                 $teacherSubjectsId = $data->teacher_subjects_id;
-                $subject = TeacherSubject::where('id', $teacherSubjectsId)->first();
+                $subject = TeacherSubject::where('id', $teacherSubjectsId)->withTrashed()->first();
                 // Tạo cấu trúc mảng theo ý muốn
                 $result[$day][$timeSlots][$classRoomId] = [
                     'ten_mon_hoc' => $subject->subject->name,

@@ -12,11 +12,11 @@ class ScheduleTable extends Model
     protected $guarded = [];
     public function teacher_subject()
     {
-        return $this->hasOne(TeacherSubject::class, 'id', 'teacher_subjects_id');
+        return $this->hasOne(TeacherSubject::class, 'id', 'teacher_subjects_id')->withTrashed();
     }
 
     public function class_room()
     {
-        return $this->hasOne(ClassRoom::class, 'id', 'class_room_id');
+        return $this->hasOne(ClassRoom::class, 'id', 'class_room_id')->withTrashed();
     }
 }

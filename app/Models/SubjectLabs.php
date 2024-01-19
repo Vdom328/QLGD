@@ -13,6 +13,6 @@ class SubjectLabs extends Model
 
     public function subject()
     {
-        return $this->hasOne(Subject::class, 'id', 'subject_id');
+        return $this->hasOne(Subject::class, 'id', 'subject_id')->withTrashed();
     }
 }
