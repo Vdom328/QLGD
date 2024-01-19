@@ -348,13 +348,23 @@ class SchedulerService implements ISchedulerService
 
             if (!isset($subject_total_credits_added[$subject_id])) {
                 $missing_credits = $quantityCredits['subject_weekly_max'];
-                $missing_credits_subjects[$subject_id] = 'Môn: ' . $subject->subject->name . ', Lớp:' . ' Bị thiếu ' . $missing_credits . ' tiết';
+                if (isset($subject->class->name)) {
+                   $class_name = $subject->class->name;
+                }else{
+                    $class_name = '';
+                }
+                $missing_credits_subjects[$subject_id] = 'Môn: ' . $subject->subject->name . ', Lớp:'.   $class_name ??'' . ' Bị thiếu ' . $missing_credits . ' tiết';
                 continue;
             }
 
             if ($subject_total_credits_added[$subject_id] < $quantityCredits['subject_weekly_max']) {
+                if (isset($subject->class->name)) {
+                    $class_name = $subject->class->name;
+                 }else{
+                     $class_name = '';
+                 }
                 $missing_credits = $quantityCredits['subject_weekly_max'] - $subject_total_credits_added[$subject_id];
-                $missing_credits_subjects[$subject_id] = 'Môn: ' . $subject->subject->name . ', Lớp:' . ' Bị thiếu ' . $missing_credits . ' tiết';
+                $missing_credits_subjects[$subject_id] = 'Môn: ' . $subject->subject->name . ', Lớp:' .  $class_name ?? '' . ' Bị thiếu ' . $missing_credits . ' tiết';
             }
         }
 
